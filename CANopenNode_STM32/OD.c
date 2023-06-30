@@ -990,24 +990,55 @@ static CO_PROGMEM ODObjs_t ODObjs = {
             .dataLength = 4
         }
     },
-    .o_1A02_TPDOMappingParameter = {
+    .o_1F80_NMTStartup = {
+        .dataOrig = &OD_PERSIST_COMM.x1F80_NMTStartup,
+        .attribute = ODA_SDO_RW | ODA_MB,
+        .dataLength = 4
+    },
+    .o_1F81_slaveAssignment = {
+        .dataOrig0 = &OD_RAM.x1F81_slaveAssignment_sub0,
+        .dataOrig = NULL,
+        .attribute0 = ODA_SDO_R,
+        .attribute = ODA_SDO_RW | ODA_MB,
+        .dataElementLength = 4,
+        .dataElementSizeof = sizeof(uint32_t)
+    },
+    .o_1F82_requestNMT = {
+        .dataOrig0 = &OD_RAM.x1F82_requestNMT_sub0,
+        .dataOrig = NULL,
+        .attribute0 = ODA_SDO_R,
+        .attribute = ODA_SDO_RW,
+        .dataElementLength = 1,
+        .dataElementSizeof = sizeof(uint8_t)
+    },
+    .o_1F89_bootTime = {
+        .dataOrig = NULL,
+        .attribute = ODA_SDO_RW | ODA_MB,
+        .dataLength = 4
+    },
+    .o_3000_command_Word = {
+        .dataOrig = &OD_PERSIST_COMM.x3000_command_Word,
+        .attribute = ODA_SDO_RW | ODA_TRPDO | ODA_MB,
+        .dataLength = 2
+    },
+    .o_3001_large_Display = {
         {
-            .dataOrig = &OD_PERSIST_COMM.x1A02_TPDOMappingParameter.numberOfMappedApplicationObjectsInPDO,
+            .dataOrig = &OD_PERSIST_COMM.x3001_large_Display.large_Display_Length,
             .subIndex = 0,
-            .attribute = ODA_SDO_RW,
+            .attribute = ODA_SDO_R | ODA_TRPDO,
             .dataLength = 1
         },
         {
             .dataOrig = &OD_PERSIST_COMM.x1A02_TPDOMappingParameter.applicationObject1,
             .subIndex = 1,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
+            .attribute = ODA_SDO_RW | ODA_TRPDO,
+            .dataLength = 1
         },
         {
             .dataOrig = &OD_PERSIST_COMM.x1A02_TPDOMappingParameter.applicationObject2,
             .subIndex = 2,
-            .attribute = ODA_SDO_RW | ODA_MB,
-            .dataLength = 4
+            .attribute = ODA_SDO_RW | ODA_TRPDO,
+            .dataLength = 1
         },
         {
             .dataOrig = &OD_PERSIST_COMM.x1A02_TPDOMappingParameter.applicationObject3,
