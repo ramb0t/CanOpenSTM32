@@ -661,7 +661,10 @@ HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* hcan) {
  */
 void
 HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef* hcan) {
-    prv_read_can_received_msg(hcan, CAN_RX_FIFO1, 0);
+    //prv_read_can_received_msg(hcan, CAN_RX_FIFO1, 0);
+	if(hcan == &hcan2) { // hcan2
+		can2_read();
+	}
 }
 
 /**
