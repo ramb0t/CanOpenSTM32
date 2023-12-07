@@ -15,7 +15,7 @@
         <ProfileTechnology>CANopen</ProfileTechnology>
       </ISO15745Reference>
     </ProfileHeader>
-    <ProfileBody xmlns:q1="http://www.canopen.org/xml/1.1" xsi:type="q1:ProfileBody_Device_CANopen" formatName="CANopen" formatVersion="1.0" fileName="DS301_profile.xpd" fileCreator="" fileCreationDate="2020-11-23" fileCreationTime="13:00:00.0000000+02:00" fileModifiedBy="" fileModificationDate="2023-10-01" fileModificationTime="23:11:18.4365952+02:00" fileVersion="1" supportedLanguages="en" xmlns="">
+    <ProfileBody xmlns:q1="http://www.canopen.org/xml/1.1" xsi:type="q1:ProfileBody_Device_CANopen" formatName="CANopen" formatVersion="1.0" fileName="DS301_profile.xpd" fileCreator="" fileCreationDate="2020-11-23" fileCreationTime="13:00:00.0000000+02:00" fileModifiedBy="" fileModificationDate="2023-12-07" fileModificationTime="22:05:02.9146884+02:00" fileVersion="1" supportedLanguages="en" xmlns="">
       <q1:DeviceIdentity>
         <q1:vendorName></q1:vendorName>
         <q1:vendorID></q1:vendorID>
@@ -986,7 +986,6 @@ The life time factor multiplied with the guard time gives the life time for the 
 * Value 0x01: on error do nothing
 * Value 0x02: on error change to NMT state Stopped</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_ARR_1029" />
-            <q1:property name="CO_disabled" value="true" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_102900">
@@ -997,7 +996,7 @@ The life time factor multiplied with the guard time gives the life time for the 
           <q1:parameter uniqueID="UID_SUB_102901" access="readWrite">
             <label lang="en">Communication error</label>
             <USINT />
-            <q1:defaultValue value="0x00" />
+            <q1:defaultValue value="0x01" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_102902" access="readWrite">
             <label lang="en">Profile- or manufacturer-specific error</label>
@@ -2805,7 +2804,7 @@ value has the following interpretation:</description>
         <ProfileTechnology>CANopen</ProfileTechnology>
       </ISO15745Reference>
     </ProfileHeader>
-    <ProfileBody xmlns:q2="http://www.canopen.org/xml/1.1" xsi:type="q2:ProfileBody_CommunicationNetwork_CANopen" formatName="CANopen" formatVersion="1.0" fileName="DS301_profile.xpd" fileCreator="" fileCreationDate="2020-11-23" fileCreationTime="13:00:00.0000000+02:00" fileModificationDate="2023-10-01" fileModificationTime="23:11:18.4365952+02:00" fileVersion="1" supportedLanguages="en" xmlns="">
+    <ProfileBody xmlns:q2="http://www.canopen.org/xml/1.1" xsi:type="q2:ProfileBody_CommunicationNetwork_CANopen" formatName="CANopen" formatVersion="1.0" fileName="DS301_profile.xpd" fileCreator="" fileCreationDate="2020-11-23" fileCreationTime="13:00:00.0000000+02:00" fileModificationDate="2023-12-07" fileModificationTime="22:05:02.9146884+02:00" fileVersion="1" supportedLanguages="en" xmlns="">
       <ApplicationLayers>
         <q2:CANopenObjectList>
           <CANopenObject index="1000" name="Device type" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_1000" />

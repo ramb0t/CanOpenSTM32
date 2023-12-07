@@ -39,6 +39,8 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
         .serialNumber = 0x00000000
     },
     .x1019_synchronousCounterOverflowValue = 0x00,
+    .x1029_errorBehaviorObject_sub0 = 0x02,
+    .x1029_errorBehaviorObject = {0x01, 0x00},
     .x1280_SDOClientParameter = {
         .highestSub_indexSupported = 0x03,
         .COB_IDClientToServerTx = 0x80000000,
@@ -206,6 +208,7 @@ typedef struct {
     OD_obj_var_t o_1017_producerHeartbeatTime;
     OD_obj_record_t o_1018_identity[5];
     OD_obj_var_t o_1019_synchronousCounterOverflowValue;
+    OD_obj_array_t o_1029_errorBehaviorObject;
     OD_obj_record_t o_1200_SDOServerParameter[3];
     OD_obj_record_t o_1280_SDOClientParameter[4];
     OD_obj_record_t o_1400_RPDOCommunicationParameter[4];
@@ -361,6 +364,14 @@ static CO_PROGMEM ODObjs_t ODObjs = {
         .dataOrig = &OD_PERSIST_COMM.x1019_synchronousCounterOverflowValue,
         .attribute = ODA_SDO_RW,
         .dataLength = 1
+    },
+    .o_1029_errorBehaviorObject = {
+        .dataOrig0 = &OD_PERSIST_COMM.x1029_errorBehaviorObject_sub0,
+        .dataOrig = &OD_PERSIST_COMM.x1029_errorBehaviorObject[0],
+        .attribute0 = ODA_SDO_R,
+        .attribute = ODA_SDO_RW,
+        .dataElementLength = 1,
+        .dataElementSizeof = sizeof(uint8_t)
     },
     .o_1200_SDOServerParameter = {
         {
@@ -1029,6 +1040,7 @@ static OD_ATTR_OD OD_entry_t ODList[] = {
     {0x1017, 0x01, ODT_VAR, &ODObjs.o_1017_producerHeartbeatTime, NULL},
     {0x1018, 0x05, ODT_REC, &ODObjs.o_1018_identity, NULL},
     {0x1019, 0x01, ODT_VAR, &ODObjs.o_1019_synchronousCounterOverflowValue, NULL},
+    {0x1029, 0x03, ODT_ARR, &ODObjs.o_1029_errorBehaviorObject, NULL},
     {0x1200, 0x03, ODT_REC, &ODObjs.o_1200_SDOServerParameter, NULL},
     {0x1280, 0x04, ODT_REC, &ODObjs.o_1280_SDOClientParameter, NULL},
     {0x1400, 0x04, ODT_REC, &ODObjs.o_1400_RPDOCommunicationParameter, NULL},

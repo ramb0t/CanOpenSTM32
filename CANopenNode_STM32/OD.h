@@ -16,7 +16,7 @@
 
         Created:      2020/11/23 13:00:00
         Created By:   
-        Modified:     2023/10/01 23:11:18
+        Modified:     2023/12/07 22:05:02
         Modified By:  
 
     Device Info:
@@ -55,6 +55,7 @@
 #define OD_CNT_ARR_1010 4
 #define OD_CNT_ARR_1011 4
 #define OD_CNT_ARR_1016 8
+#define OD_CNT_ARR_1029 2
 #define OD_CNT_ARR_1F81 127
 #define OD_CNT_ARR_1F82 127
 
@@ -81,6 +82,8 @@ typedef struct {
         uint32_t serialNumber;
     } x1018_identity;
     uint8_t x1019_synchronousCounterOverflowValue;
+    uint8_t x1029_errorBehaviorObject_sub0;
+    uint8_t x1029_errorBehaviorObject[OD_CNT_ARR_1029];
     struct {
         uint8_t highestSub_indexSupported;
         uint32_t COB_IDClientToServerTx;
@@ -269,35 +272,36 @@ extern OD_ATTR_OD OD_t *OD;
 #define OD_ENTRY_H1017 &OD->list[14]
 #define OD_ENTRY_H1018 &OD->list[15]
 #define OD_ENTRY_H1019 &OD->list[16]
-#define OD_ENTRY_H1200 &OD->list[17]
-#define OD_ENTRY_H1280 &OD->list[18]
-#define OD_ENTRY_H1400 &OD->list[19]
-#define OD_ENTRY_H1401 &OD->list[20]
-#define OD_ENTRY_H1402 &OD->list[21]
-#define OD_ENTRY_H1403 &OD->list[22]
-#define OD_ENTRY_H1600 &OD->list[23]
-#define OD_ENTRY_H1601 &OD->list[24]
-#define OD_ENTRY_H1602 &OD->list[25]
-#define OD_ENTRY_H1603 &OD->list[26]
-#define OD_ENTRY_H1800 &OD->list[27]
-#define OD_ENTRY_H1801 &OD->list[28]
-#define OD_ENTRY_H1A00 &OD->list[29]
-#define OD_ENTRY_H1A01 &OD->list[30]
-#define OD_ENTRY_H1F80 &OD->list[31]
-#define OD_ENTRY_H1F81 &OD->list[32]
-#define OD_ENTRY_H1F82 &OD->list[33]
-#define OD_ENTRY_H1F89 &OD->list[34]
-#define OD_ENTRY_H3000 &OD->list[35]
-#define OD_ENTRY_H3001 &OD->list[36]
-#define OD_ENTRY_H3002 &OD->list[37]
-#define OD_ENTRY_H3003 &OD->list[38]
-#define OD_ENTRY_H3004 &OD->list[39]
-#define OD_ENTRY_H3005 &OD->list[40]
-#define OD_ENTRY_H3006 &OD->list[41]
-#define OD_ENTRY_H3007 &OD->list[42]
-#define OD_ENTRY_H3008 &OD->list[43]
-#define OD_ENTRY_H3009 &OD->list[44]
-#define OD_ENTRY_H6000 &OD->list[45]
+#define OD_ENTRY_H1029 &OD->list[17]
+#define OD_ENTRY_H1200 &OD->list[18]
+#define OD_ENTRY_H1280 &OD->list[19]
+#define OD_ENTRY_H1400 &OD->list[20]
+#define OD_ENTRY_H1401 &OD->list[21]
+#define OD_ENTRY_H1402 &OD->list[22]
+#define OD_ENTRY_H1403 &OD->list[23]
+#define OD_ENTRY_H1600 &OD->list[24]
+#define OD_ENTRY_H1601 &OD->list[25]
+#define OD_ENTRY_H1602 &OD->list[26]
+#define OD_ENTRY_H1603 &OD->list[27]
+#define OD_ENTRY_H1800 &OD->list[28]
+#define OD_ENTRY_H1801 &OD->list[29]
+#define OD_ENTRY_H1A00 &OD->list[30]
+#define OD_ENTRY_H1A01 &OD->list[31]
+#define OD_ENTRY_H1F80 &OD->list[32]
+#define OD_ENTRY_H1F81 &OD->list[33]
+#define OD_ENTRY_H1F82 &OD->list[34]
+#define OD_ENTRY_H1F89 &OD->list[35]
+#define OD_ENTRY_H3000 &OD->list[36]
+#define OD_ENTRY_H3001 &OD->list[37]
+#define OD_ENTRY_H3002 &OD->list[38]
+#define OD_ENTRY_H3003 &OD->list[39]
+#define OD_ENTRY_H3004 &OD->list[40]
+#define OD_ENTRY_H3005 &OD->list[41]
+#define OD_ENTRY_H3006 &OD->list[42]
+#define OD_ENTRY_H3007 &OD->list[43]
+#define OD_ENTRY_H3008 &OD->list[44]
+#define OD_ENTRY_H3009 &OD->list[45]
+#define OD_ENTRY_H6000 &OD->list[46]
 
 
 /*******************************************************************************
@@ -320,35 +324,36 @@ extern OD_ATTR_OD OD_t *OD;
 #define OD_ENTRY_H1017_producerHeartbeatTime &OD->list[14]
 #define OD_ENTRY_H1018_identity &OD->list[15]
 #define OD_ENTRY_H1019_synchronousCounterOverflowValue &OD->list[16]
-#define OD_ENTRY_H1200_SDOServerParameter &OD->list[17]
-#define OD_ENTRY_H1280_SDOClientParameter &OD->list[18]
-#define OD_ENTRY_H1400_RPDOCommunicationParameter &OD->list[19]
-#define OD_ENTRY_H1401_RPDOCommunicationParameter &OD->list[20]
-#define OD_ENTRY_H1402_RPDOCommunicationParameter &OD->list[21]
-#define OD_ENTRY_H1403_RPDOCommunicationParameter &OD->list[22]
-#define OD_ENTRY_H1600_RPDOMappingParameter &OD->list[23]
-#define OD_ENTRY_H1601_RPDOMappingParameter &OD->list[24]
-#define OD_ENTRY_H1602_RPDOMappingParameter &OD->list[25]
-#define OD_ENTRY_H1603_RPDOMappingParameter &OD->list[26]
-#define OD_ENTRY_H1800_TPDOCommunicationParameter &OD->list[27]
-#define OD_ENTRY_H1801_TPDOCommunicationParameter &OD->list[28]
-#define OD_ENTRY_H1A00_TPDOMappingParameter &OD->list[29]
-#define OD_ENTRY_H1A01_TPDOMappingParameter &OD->list[30]
-#define OD_ENTRY_H1F80_NMTStartup &OD->list[31]
-#define OD_ENTRY_H1F81_slaveAssignment &OD->list[32]
-#define OD_ENTRY_H1F82_requestNMT &OD->list[33]
-#define OD_ENTRY_H1F89_bootTime &OD->list[34]
-#define OD_ENTRY_H3000_SOC &OD->list[35]
-#define OD_ENTRY_H3001_status &OD->list[36]
-#define OD_ENTRY_H3002_DCVolt &OD->list[37]
-#define OD_ENTRY_H3003_DCCurrent &OD->list[38]
-#define OD_ENTRY_H3004_sysTemp &OD->list[39]
-#define OD_ENTRY_H3005_thermDerate &OD->list[40]
-#define OD_ENTRY_H3006_DCL &OD->list[41]
-#define OD_ENTRY_H3007_CCL &OD->list[42]
-#define OD_ENTRY_H3008_DVL &OD->list[43]
-#define OD_ENTRY_H3009_CVL &OD->list[44]
-#define OD_ENTRY_H6000_velocity &OD->list[45]
+#define OD_ENTRY_H1029_errorBehaviorObject &OD->list[17]
+#define OD_ENTRY_H1200_SDOServerParameter &OD->list[18]
+#define OD_ENTRY_H1280_SDOClientParameter &OD->list[19]
+#define OD_ENTRY_H1400_RPDOCommunicationParameter &OD->list[20]
+#define OD_ENTRY_H1401_RPDOCommunicationParameter &OD->list[21]
+#define OD_ENTRY_H1402_RPDOCommunicationParameter &OD->list[22]
+#define OD_ENTRY_H1403_RPDOCommunicationParameter &OD->list[23]
+#define OD_ENTRY_H1600_RPDOMappingParameter &OD->list[24]
+#define OD_ENTRY_H1601_RPDOMappingParameter &OD->list[25]
+#define OD_ENTRY_H1602_RPDOMappingParameter &OD->list[26]
+#define OD_ENTRY_H1603_RPDOMappingParameter &OD->list[27]
+#define OD_ENTRY_H1800_TPDOCommunicationParameter &OD->list[28]
+#define OD_ENTRY_H1801_TPDOCommunicationParameter &OD->list[29]
+#define OD_ENTRY_H1A00_TPDOMappingParameter &OD->list[30]
+#define OD_ENTRY_H1A01_TPDOMappingParameter &OD->list[31]
+#define OD_ENTRY_H1F80_NMTStartup &OD->list[32]
+#define OD_ENTRY_H1F81_slaveAssignment &OD->list[33]
+#define OD_ENTRY_H1F82_requestNMT &OD->list[34]
+#define OD_ENTRY_H1F89_bootTime &OD->list[35]
+#define OD_ENTRY_H3000_SOC &OD->list[36]
+#define OD_ENTRY_H3001_status &OD->list[37]
+#define OD_ENTRY_H3002_DCVolt &OD->list[38]
+#define OD_ENTRY_H3003_DCCurrent &OD->list[39]
+#define OD_ENTRY_H3004_sysTemp &OD->list[40]
+#define OD_ENTRY_H3005_thermDerate &OD->list[41]
+#define OD_ENTRY_H3006_DCL &OD->list[42]
+#define OD_ENTRY_H3007_CCL &OD->list[43]
+#define OD_ENTRY_H3008_DVL &OD->list[44]
+#define OD_ENTRY_H3009_CVL &OD->list[45]
+#define OD_ENTRY_H6000_velocity &OD->list[46]
 
 
 /*******************************************************************************
