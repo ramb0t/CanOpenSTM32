@@ -1,6 +1,6 @@
 [FileInfo]
 FileName=DS301_profile.eds
-FileVersion=1
+FileVersion=2
 FileRevision=1
 LastEDS=
 EDSVersion=4.0
@@ -8,8 +8,8 @@ Description=
 CreationTime=1:00PM
 CreationDate=11-23-2020
 CreatedBy=
-ModificationTime=11:11PM
-ModificationDate=10-01-2023
+ModificationTime=11:54PM
+ModificationDate=05-21-2024
 ModifiedBy=
 
 [DeviceInfo]
@@ -35,6 +35,7 @@ GroupMessaging=0
 NrOfRXPDO=4
 NrOfTXPDO=2
 LSS_Supported=1
+NG_Slave=0
 
 [DummyUsage]
 Dummy0001=0
@@ -124,7 +125,7 @@ DefaultValue=0x00000000
 PDOMapping=0
 
 [OptionalObjects]
-SupportedObjects=33
+SupportedObjects=37
 1=0x1003
 2=0x1005
 3=0x1006
@@ -139,25 +140,29 @@ SupportedObjects=33
 12=0x1016
 13=0x1017
 14=0x1019
-15=0x1200
-16=0x1280
-17=0x1400
-18=0x1401
-19=0x1402
-20=0x1403
-21=0x1600
-22=0x1601
-23=0x1602
-24=0x1603
-25=0x1800
-26=0x1801
-27=0x1A00
-28=0x1A01
-29=0x1F80
-30=0x1F81
-31=0x1F82
-32=0x1F89
-33=0x6000
+15=0x1029
+16=0x1200
+17=0x1280
+18=0x1400
+19=0x1401
+20=0x1402
+21=0x1403
+22=0x1600
+23=0x1601
+24=0x1602
+25=0x1603
+26=0x1800
+27=0x1801
+28=0x1A00
+29=0x1A01
+30=0x1F80
+31=0x1F81
+32=0x1F82
+33=0x1F89
+34=0x6030
+35=0x6031
+36=0x6050
+37=0x6092
 
 [1003]
 ParameterName=Pre-defined error field
@@ -595,6 +600,39 @@ ObjectType=0x7
 DataType=0x0005
 AccessType=rw
 DefaultValue=0
+PDOMapping=0
+
+[1029]
+ParameterName=Error behavior object
+ObjectType=0x8
+;StorageLocation=PERSIST_COMM
+SubNumber=0x3
+
+[1029sub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x02
+PDOMapping=0
+
+[1029sub1]
+ParameterName=Communication error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=rw
+DefaultValue=0x01
+PDOMapping=0
+
+[1029sub2]
+ParameterName=Profile- or manufacturer-specific error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=rw
+DefaultValue=0x00
 PDOMapping=0
 
 [1200]
@@ -1329,7 +1367,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x30000008
+DefaultValue=0x20000008
 PDOMapping=0
 
 [1A00sub2]
@@ -1338,7 +1376,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x30010008
+DefaultValue=0x20010008
 PDOMapping=0
 
 [1A00sub3]
@@ -1347,7 +1385,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x30020010
+DefaultValue=0x20020010
 PDOMapping=0
 
 [1A00sub4]
@@ -1356,7 +1394,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x30030010
+DefaultValue=0x20030010
 PDOMapping=0
 
 [1A00sub5]
@@ -1365,7 +1403,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x30040008
+DefaultValue=0x20040008
 PDOMapping=0
 
 [1A00sub6]
@@ -1374,7 +1412,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x30050008
+DefaultValue=0x20050008
 PDOMapping=0
 
 [1A00sub7]
@@ -1416,7 +1454,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x30060010
+DefaultValue=0x20060010
 PDOMapping=0
 
 [1A01sub2]
@@ -1425,7 +1463,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x30070010
+DefaultValue=0x20070010
 PDOMapping=0
 
 [1A01sub3]
@@ -1434,7 +1472,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x30080010
+DefaultValue=0x20080010
 PDOMapping=0
 
 [1A01sub4]
@@ -1443,7 +1481,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x30090010
+DefaultValue=0x20090010
 PDOMapping=0
 
 [1A01sub5]
@@ -3816,29 +3854,203 @@ AccessType=rw
 DefaultValue=
 PDOMapping=0
 
-[6000]
-ParameterName=velocity
+[6030]
+ParameterName=BatterySN
+ObjectType=0x8
+;StorageLocation=RAM
+SubNumber=0x6
+
+[6030sub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x05
+PDOMapping=0
+
+[6030sub1]
+ParameterName=BatterySN 1-4
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
-AccessType=rww
+AccessType=ro
+DefaultValue=1
+PDOMapping=0
+
+[6030sub2]
+ParameterName=BatterySN 5-8
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=2
+PDOMapping=0
+
+[6030sub3]
+ParameterName=BatterySN 9-12
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=3
+PDOMapping=0
+
+[6030sub4]
+ParameterName=BatterySN 13-16
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=4
+PDOMapping=0
+
+[6030sub5]
+ParameterName=BatterySN 17-20
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=5
+PDOMapping=0
+
+[6031]
+ParameterName=Model ID
+ObjectType=0x8
+;StorageLocation=RAM
+SubNumber=0x9
+
+[6031sub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x08
+PDOMapping=0
+
+[6031sub1]
+ParameterName=Model ID 1-4
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=6
+PDOMapping=0
+
+[6031sub2]
+ParameterName=Model ID 5-8
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=7
+PDOMapping=0
+
+[6031sub3]
+ParameterName=Model ID 9-12
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=8
+PDOMapping=0
+
+[6031sub4]
+ParameterName=Model ID 13-16
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=9
+PDOMapping=0
+
+[6031sub5]
+ParameterName=Model ID 17-20
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=10
+PDOMapping=0
+
+[6031sub6]
+ParameterName=Battery Brand
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=42
+PDOMapping=0
+
+[6031sub7]
+ParameterName=Integrated or BBR
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=1
+PDOMapping=0
+
+[6031sub8]
+ParameterName=Battery Type
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=1
+PDOMapping=0
+
+[6050]
+ParameterName=Cumulative Total Battery Charge (kWh)
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
 DefaultValue=0
-PDOMapping=1
+PDOMapping=0
+
+[6092]
+ParameterName=Total Battery Remaining Energy (kWh)
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0006
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
 
 [ManufacturerObjects]
-SupportedObjects=10
-1=0x3000
-2=0x3001
-3=0x3002
-4=0x3003
-5=0x3004
-6=0x3005
-7=0x3006
-8=0x3007
-9=0x3008
-10=0x3009
+SupportedObjects=28
+1=0x2000
+2=0x2001
+3=0x2002
+4=0x2003
+5=0x2004
+6=0x2005
+7=0x2006
+8=0x2007
+9=0x2008
+10=0x2009
+11=0x280C
+12=0x280D
+13=0x3000
+14=0x3001
+15=0x3002
+16=0x3003
+17=0x3004
+18=0x3005
+19=0x3006
+20=0x3007
+21=0x3008
+22=0x3009
+23=0x300A
+24=0x300B
+25=0x300C
+26=0x300D
+27=0x300E
+28=0x300F
 
-[3000]
+[2000]
 ParameterName=SOC
 ObjectType=0x7
 ;StorageLocation=PERSIST_COMM
@@ -3847,7 +4059,7 @@ AccessType=rw
 DefaultValue=0
 PDOMapping=1
 
-[3001]
+[2001]
 ParameterName=Status
 ObjectType=0x7
 ;StorageLocation=PERSIST_COMM
@@ -3856,7 +4068,7 @@ AccessType=rw
 DefaultValue=0
 PDOMapping=1
 
-[3002]
+[2002]
 ParameterName=DCVolt
 ObjectType=0x7
 ;StorageLocation=PERSIST_COMM
@@ -3865,7 +4077,7 @@ AccessType=rw
 DefaultValue=0
 PDOMapping=1
 
-[3003]
+[2003]
 ParameterName=DCCurrent
 ObjectType=0x7
 ;StorageLocation=PERSIST_COMM
@@ -3874,7 +4086,7 @@ AccessType=rwr
 DefaultValue=0
 PDOMapping=1
 
-[3004]
+[2004]
 ParameterName=SysTemp
 ObjectType=0x7
 ;StorageLocation=PERSIST_COMM
@@ -3883,7 +4095,7 @@ AccessType=rwr
 DefaultValue=0
 PDOMapping=1
 
-[3005]
+[2005]
 ParameterName=ThermDerate
 ObjectType=0x7
 ;StorageLocation=PERSIST_COMM
@@ -3892,7 +4104,7 @@ AccessType=rw
 DefaultValue=0x00
 PDOMapping=1
 
-[3006]
+[2006]
 ParameterName=DCL
 ObjectType=0x7
 ;StorageLocation=RAM
@@ -3901,7 +4113,7 @@ AccessType=rwr
 DefaultValue=0
 PDOMapping=1
 
-[3007]
+[2007]
 ParameterName=CCL
 ObjectType=0x7
 ;StorageLocation=RAM
@@ -3910,7 +4122,7 @@ AccessType=rwr
 DefaultValue=0
 PDOMapping=1
 
-[3008]
+[2008]
 ParameterName=DVL
 ObjectType=0x7
 ;StorageLocation=RAM
@@ -3919,7 +4131,7 @@ AccessType=rwr
 DefaultValue=0
 PDOMapping=1
 
-[3009]
+[2009]
 ParameterName=CVL
 ObjectType=0x7
 ;StorageLocation=RAM
@@ -3927,4 +4139,623 @@ DataType=0x0006
 AccessType=rwr
 DefaultValue=0
 PDOMapping=1
+
+[280C]
+ParameterName=Total Number of Battery Cycles
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0006
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[280D]
+ParameterName=SW Asm Version
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3000]
+ParameterName=Battery Efficiency, Charge In vs. Discharge out
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+HighLimit=100
+DefaultValue=0
+PDOMapping=0
+
+[3001]
+ParameterName=Nominal SOH
+ObjectType=0x8
+;StorageLocation=RAM
+SubNumber=0x5
+
+[3001sub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x04
+PDOMapping=0
+
+[3001sub1]
+ParameterName=Nominal Battery Energy (kWh)
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0006
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3001sub2]
+ParameterName=Nominal Battery Voltage (V)
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0006
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3001sub3]
+ParameterName=SOH, Warranty Value, percent of beginning life of Capacity (Ah)
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0006
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3001sub4]
+ParameterName=SOH, Running Value, percent of beginning life of Capacity (Ah)
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0006
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3002]
+ParameterName=Remaining battery cycles left for warranty
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0006
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3003]
+ParameterName=Accumulated time in service
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3004]
+ParameterName=Remaining hours left for warranty
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=rw
+DefaultValue=0
+PDOMapping=0
+
+[3005]
+ParameterName=BMS Data
+ObjectType=0x8
+;StorageLocation=RAM
+SubNumber=0xC
+
+[3005sub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x0B
+PDOMapping=0
+
+[3005sub1]
+ParameterName=BMS Internal Temperature
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+HighLimit=125
+LowLimit=-40
+DefaultValue=
+PDOMapping=0
+
+[3005sub2]
+ParameterName=Highest Cell Voltage
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=
+PDOMapping=0
+
+[3005sub3]
+ParameterName=Highest Cell Voltage Cell Index
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=
+PDOMapping=0
+
+[3005sub4]
+ParameterName=Lowest Cell Voltage	
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=
+PDOMapping=0
+
+[3005sub5]
+ParameterName=Lowest Cell Voltage Cell Index 
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=
+PDOMapping=0
+
+[3005sub6]
+ParameterName=Highest Cell Temperature
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+HighLimit=125
+LowLimit=-40
+DefaultValue=
+PDOMapping=0
+
+[3005sub7]
+ParameterName=Highest Cell Temperature Thermistor Position
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=
+PDOMapping=0
+
+[3005sub8]
+ParameterName=Lowest Cell Temperature
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+HighLimit=125
+LowLimit=-40
+DefaultValue=
+PDOMapping=0
+
+[3005sub9]
+ParameterName=Lowest Cell Temperature Thermistor Position
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=
+PDOMapping=0
+
+[3005subA]
+ParameterName=Max Current Discharge
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=
+PDOMapping=0
+
+[3005subB]
+ParameterName=Max Current Charge
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=
+PDOMapping=0
+
+[3006]
+ParameterName=Log of Fault Codes
+ObjectType=0x8
+;StorageLocation=RAM
+SubNumber=0x11
+
+[3006sub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x10
+PDOMapping=0
+
+[3006sub1]
+ParameterName=Highest priority active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006sub2]
+ParameterName=Timestamp Highest priority active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006sub3]
+ParameterName=2nd highest priority active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006sub4]
+ParameterName=Timestamp 2nd  Highest priority active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006sub5]
+ParameterName=3rd highest priority active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006sub6]
+ParameterName=Timestamp 3rd  Highest priority active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006sub7]
+ParameterName=4th highest priority active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006sub8]
+ParameterName=Timestamp 4th Highest priority active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006sub9]
+ParameterName=Highest priority previously active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006subA]
+ParameterName=Timestamp Highest priority previously active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006subB]
+ParameterName=2nd highest priority previously active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006subC]
+ParameterName=Timestamp 2nd highest priority previously active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006subD]
+ParameterName=3rd highest priority previously active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006subE]
+ParameterName=Timestamp 3rd highest priority previously active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006subF]
+ParameterName=4th highest priority previously active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3006sub10]
+ParameterName=Timestamp 4th highest priority previously active error
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3007]
+ParameterName=Total Number of Charge Events
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3008]
+ParameterName=Total time receiving current in Charge mode
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3009]
+ParameterName=Total time in Charge Mode
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300A]
+ParameterName=Thermistors
+ObjectType=0x8
+;StorageLocation=RAM
+SubNumber=0x5
+
+[300Asub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x04
+PDOMapping=0
+
+[300Asub1]
+ParameterName=Thermistor 1
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0003
+AccessType=ro
+DefaultValue=0x1FF
+PDOMapping=0
+
+[300Asub2]
+ParameterName=Thermistor 2
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0003
+AccessType=ro
+DefaultValue=0x1FF
+PDOMapping=0
+
+[300Asub3]
+ParameterName=Thermistor sub 1
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0003
+AccessType=ro
+DefaultValue=0x1FF
+PDOMapping=0
+
+[300Asub4]
+ParameterName=Thermistor sub 2
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0003
+AccessType=ro
+DefaultValue=0x1FF
+PDOMapping=0
+
+[300B]
+ParameterName=Cumulative Total Discharge kWh
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300C]
+ParameterName=Energy remaining for Battery Warranty (kWh)
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300D]
+ParameterName=Cumulative Total Battery Regen kWh
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300E]
+ParameterName=GPS Derate
+ObjectType=0x8
+;StorageLocation=RAM
+SubNumber=0x6
+
+[300Esub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x05
+PDOMapping=0
+
+[300Esub1]
+ParameterName=GPS Location
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300Esub2]
+ParameterName=GPS CAN Protocol Specification Rev
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300Esub3]
+ParameterName=High Temperature Derate Start (°C/°F) – Discharge
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300Esub4]
+ParameterName=Low Temperature Derate Start (°C/°F) – Discharge
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300Esub5]
+ParameterName=Lift Lockout Start (CSOC%)
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300F]
+ParameterName=Charger
+ObjectType=0x8
+;StorageLocation=RAM
+SubNumber=0x7
+
+[300Fsub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x06
+PDOMapping=0
+
+[300Fsub1]
+ParameterName=Total Number of Charger Faults
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300Fsub2]
+ParameterName=Number of Charges Completed without cell Balancing
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300Fsub3]
+ParameterName=Timestamp of Last Charge Completed without Cell Balancing
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300Fsub4]
+ParameterName=Number of Charges Completed with cell Balancing
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300Fsub5]
+ParameterName=Timestamp of Last Charge Completed with Cell Balancing
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[300Fsub6]
+ParameterName=Warrantable Battery Energy (kWh)
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
 
