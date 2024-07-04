@@ -1,6 +1,6 @@
 [FileInfo]
 FileName=DS301_profile.eds
-FileVersion=2
+FileVersion=3
 FileRevision=1
 LastEDS=
 EDSVersion=4.0
@@ -8,8 +8,8 @@ Description=
 CreationTime=1:00PM
 CreationDate=11-23-2020
 CreatedBy=
-ModificationTime=12:14AM
-ModificationDate=05-22-2024
+ModificationTime=6:58PM
+ModificationDate=07-04-2024
 ModifiedBy=
 
 [DeviceInfo]
@@ -4020,7 +4020,7 @@ DefaultValue=0
 PDOMapping=0
 
 [ManufacturerObjects]
-SupportedObjects=28
+SupportedObjects=27
 1=0x2000
 2=0x2001
 3=0x2002
@@ -4036,19 +4036,18 @@ SupportedObjects=28
 13=0x3000
 14=0x3001
 15=0x3002
-16=0x3003
-17=0x3004
-18=0x3005
-19=0x3006
-20=0x3007
-21=0x3008
-22=0x3009
-23=0x300A
-24=0x300B
-25=0x300C
-26=0x300D
-27=0x300E
-28=0x300F
+16=0x3004
+17=0x3005
+18=0x3006
+19=0x3007
+20=0x3008
+21=0x3009
+22=0x300A
+23=0x300B
+24=0x300C
+25=0x300D
+26=0x300E
+27=0x300F
 
 [2000]
 ParameterName=SOC
@@ -4164,7 +4163,6 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0005
 AccessType=ro
-HighLimit=100
 DefaultValue=0
 PDOMapping=0
 
@@ -4220,6 +4218,21 @@ DefaultValue=0
 PDOMapping=0
 
 [3002]
+ParameterName=Lifetime Avg
+ObjectType=0x9
+;StorageLocation=RAM
+SubNumber=0x6
+
+[3002sub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x05
+PDOMapping=0
+
+[3002sub1]
 ParameterName=Remaining battery cycles left for warranty
 ObjectType=0x7
 ;StorageLocation=RAM
@@ -4228,11 +4241,38 @@ AccessType=ro
 DefaultValue=0
 PDOMapping=0
 
-[3003]
+[3002sub2]
 ParameterName=Accumulated time in service
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3002sub3]
+ParameterName=Lifetime Average Batt Temp
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0003
+AccessType=ro
+DefaultValue=-40
+PDOMapping=0
+
+[3002sub4]
+ParameterName=Lifetime Average Charge Rate
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0006
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[3002sub5]
+ParameterName=Lifetime Average Discharge Rate
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0006
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
@@ -4248,7 +4288,7 @@ PDOMapping=0
 
 [3005]
 ParameterName=BMS Data
-ObjectType=0x8
+ObjectType=0x9
 ;StorageLocation=RAM
 SubNumber=0xC
 
@@ -4265,112 +4305,106 @@ PDOMapping=0
 ParameterName=BMS Internal Temperature
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0003
 AccessType=ro
-HighLimit=125
-LowLimit=-40
-DefaultValue=
+DefaultValue=-40
 PDOMapping=0
 
 [3005sub2]
 ParameterName=Highest Cell Voltage
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0006
 AccessType=ro
-DefaultValue=
+DefaultValue=0
 PDOMapping=0
 
 [3005sub3]
 ParameterName=Highest Cell Voltage Cell Index
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0006
 AccessType=ro
-DefaultValue=
+DefaultValue=0
 PDOMapping=0
 
 [3005sub4]
 ParameterName=Lowest Cell Voltage	
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0006
 AccessType=ro
-DefaultValue=
+DefaultValue=0
 PDOMapping=0
 
 [3005sub5]
-ParameterName=Lowest Cell Voltage Cell Index 
+ParameterName=Lowest Cell Voltage Cell Index
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0006
 AccessType=ro
-DefaultValue=
+DefaultValue=0
 PDOMapping=0
 
 [3005sub6]
 ParameterName=Highest Cell Temperature
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0003
 AccessType=ro
-HighLimit=125
-LowLimit=-40
-DefaultValue=
+DefaultValue=-40
 PDOMapping=0
 
 [3005sub7]
 ParameterName=Highest Cell Temperature Thermistor Position
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0006
 AccessType=ro
-DefaultValue=
+DefaultValue=0
 PDOMapping=0
 
 [3005sub8]
 ParameterName=Lowest Cell Temperature
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0003
 AccessType=ro
-HighLimit=125
-LowLimit=-40
-DefaultValue=
+DefaultValue=-40
 PDOMapping=0
 
 [3005sub9]
 ParameterName=Lowest Cell Temperature Thermistor Position
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0006
 AccessType=ro
-DefaultValue=
+DefaultValue=0
 PDOMapping=0
 
 [3005subA]
 ParameterName=Max Current Discharge
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0006
 AccessType=ro
-DefaultValue=
+DefaultValue=0
 PDOMapping=0
 
 [3005subB]
 ParameterName=Max Current Charge
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0006
 AccessType=ro
-DefaultValue=
+DefaultValue=0
 PDOMapping=0
 
 [3006]
 ParameterName=Log of Fault Codes
-ObjectType=0x8
+ObjectType=0x9
 ;StorageLocation=RAM
-SubNumber=0x11
+SubNumber=0x10
 
 [3006sub0]
 ParameterName=Highest sub-index supported
@@ -4378,20 +4412,20 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0005
 AccessType=ro
-DefaultValue=0x10
+DefaultValue=0x0F
 PDOMapping=0
 
 [3006sub1]
-ParameterName=Highest priority active error
+ParameterName=1st highest priority active error
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0005
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
 
 [3006sub2]
-ParameterName=Timestamp Highest priority active error
+ParameterName=Timestamp 1st highest priority active error
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
@@ -4403,13 +4437,13 @@ PDOMapping=0
 ParameterName=2nd highest priority active error
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0005
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
 
 [3006sub4]
-ParameterName=Timestamp 2nd  Highest priority active error
+ParameterName=Timestamp 2nd highest priority active error
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
@@ -4421,13 +4455,13 @@ PDOMapping=0
 ParameterName=3rd highest priority active error
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0005
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
 
 [3006sub6]
-ParameterName=Timestamp 3rd  Highest priority active error
+ParameterName=Timestamp 3rd highest priority active error
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
@@ -4439,13 +4473,13 @@ PDOMapping=0
 ParameterName=4th highest priority active error
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0005
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
 
 [3006sub8]
-ParameterName=Timestamp 4th Highest priority active error
+ParameterName=Timestamp 4th highest priority active error
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
@@ -4454,16 +4488,16 @@ DefaultValue=0
 PDOMapping=0
 
 [3006sub9]
-ParameterName=Highest priority previously active error
+ParameterName=1st highest priority previously active error
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0005
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
 
 [3006subA]
-ParameterName=Timestamp Highest priority previously active error
+ParameterName=Timestamp 1st highest priority previously active error
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
@@ -4475,7 +4509,7 @@ PDOMapping=0
 ParameterName=2nd highest priority previously active error
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0005
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
@@ -4493,7 +4527,7 @@ PDOMapping=0
 ParameterName=3rd highest priority previously active error
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0005
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
@@ -4511,13 +4545,28 @@ PDOMapping=0
 ParameterName=4th highest priority previously active error
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0005
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
 
-[3006sub10]
-ParameterName=Timestamp 4th highest priority previously active error
+[3007]
+ParameterName=Total Number of Charge Events
+ObjectType=0x9
+;StorageLocation=RAM
+SubNumber=0x3
+
+[3007sub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x02
+PDOMapping=0
+
+[3007sub1]
+ParameterName=Total Number of Charge Events
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
@@ -4525,8 +4574,8 @@ AccessType=ro
 DefaultValue=0
 PDOMapping=0
 
-[3007]
-ParameterName=Total Number of Charge Events
+[3007sub2]
+ParameterName=Timestamp 4th highest priority previously active error
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
