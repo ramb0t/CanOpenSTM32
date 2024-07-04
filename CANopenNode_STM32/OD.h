@@ -12,11 +12,11 @@
     File info:
         File Names:   OD.h; OD.c
         Project File: DS301_profile.xpd
-        File Version: 2
+        File Version: 3
 
         Created:      2020/11/23 13:00:00
         Created By:   
-        Modified:     2024/05/21 23:54:14
+        Modified:     2024/07/04 18:58:47
         Modified By:  
 
     Device Info:
@@ -59,8 +59,6 @@
 #define OD_CNT_ARR_1F81 127
 #define OD_CNT_ARR_1F82 127
 #define OD_CNT_ARR_3001 4
-#define OD_CNT_ARR_3005 11
-#define OD_CNT_ARR_3006 16
 #define OD_CNT_ARR_300A 4
 #define OD_CNT_ARR_300E 5
 #define OD_CNT_ARR_300F 6
@@ -216,13 +214,52 @@ typedef struct {
     uint8_t x3000_batteryEfficiencyChargeInVsDischargeOut;
     uint8_t x3001_nominalSOH_sub0;
     uint16_t x3001_nominalSOH[OD_CNT_ARR_3001];
-    uint16_t x3002_remainingBatteryCyclesLeftForWarranty;
-    uint32_t x3003_accumulatedTimeInService;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint16_t remainingBatteryCyclesLeftForWarranty;
+        uint32_t accumulatedTimeInService;
+        int16_t lifetimeAverageBattTemp;
+        uint16_t lifetimeAverageChargeRate;
+        uint16_t lifetimeAverageDischargeRate;
+    } x3002_lifetimeAvg;
     uint32_t x3004_remainingHoursLeftForWarranty;
-    uint8_t x3005_BMS_Data_sub0;
-    uint8_t x3006_logOfFaultCodes_sub0;
-    uint32_t x3006_logOfFaultCodes[OD_CNT_ARR_3006];
-    uint32_t x3007_totalNumberOfChargeEvents;
+    struct {
+        uint8_t highestSub_indexSupported;
+        int16_t BMS_InternalTemperature;
+        uint16_t highestCellVoltage;
+        uint16_t highestCellVoltageCellIndex;
+        uint16_t lowestCellVoltage;
+        uint16_t lowestCellVoltageCellIndex;
+        int16_t highestCellTemperature;
+        uint16_t highestCellTemperatureThermistorPosition;
+        int16_t lowestCellTemperature;
+        uint16_t lowestCellTemperatureThermistorPosition;
+        uint16_t maxCurrentDischarge;
+        uint16_t maxCurrentCharge;
+    } x3005_BMS_Data;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint8_t _1stHighestPriorityActiveError;
+        uint32_t timestamp1stHighestPriorityActiveError;
+        uint8_t _2ndHighestPriorityActiveError;
+        uint32_t timestamp2ndHighestPriorityActiveError;
+        uint8_t _3rdHighestPriorityActiveError;
+        uint32_t timestamp3rdHighestPriorityActiveError;
+        uint8_t _4thHighestPriorityActiveError;
+        uint32_t timestamp4thHighestPriorityActiveError;
+        uint8_t _1stHighestPriorityPreviouslyActiveError;
+        uint32_t timestamp1stHighestPriorityPreviouslyActiveError;
+        uint8_t _2ndHighestPriorityPreviouslyActiveError;
+        uint32_t timestamp2ndHighestPriorityPreviouslyActiveError;
+        uint8_t _3rdHighestPriorityPreviouslyActiveError;
+        uint32_t timestamp3rdHighestPriorityPreviouslyActiveError;
+        uint8_t _4thHighestPriorityPreviouslyActiveError;
+    } x3006_logOfFaultCodes;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t totalNumberOfChargeEvents;
+        uint32_t timestamp4thHighestPriorityPreviouslyActiveError;
+    } x3007_totalNumberOfChargeEvents;
     uint32_t x3008_totalTimeReceivingCurrentInChargeMode;
     uint32_t x3009_totalTimeInChargeMode;
     uint8_t x300A_thermistors_sub0;
@@ -339,23 +376,22 @@ extern OD_ATTR_OD OD_t *OD;
 #define OD_ENTRY_H3000 &OD->list[48]
 #define OD_ENTRY_H3001 &OD->list[49]
 #define OD_ENTRY_H3002 &OD->list[50]
-#define OD_ENTRY_H3003 &OD->list[51]
-#define OD_ENTRY_H3004 &OD->list[52]
-#define OD_ENTRY_H3005 &OD->list[53]
-#define OD_ENTRY_H3006 &OD->list[54]
-#define OD_ENTRY_H3007 &OD->list[55]
-#define OD_ENTRY_H3008 &OD->list[56]
-#define OD_ENTRY_H3009 &OD->list[57]
-#define OD_ENTRY_H300A &OD->list[58]
-#define OD_ENTRY_H300B &OD->list[59]
-#define OD_ENTRY_H300C &OD->list[60]
-#define OD_ENTRY_H300D &OD->list[61]
-#define OD_ENTRY_H300E &OD->list[62]
-#define OD_ENTRY_H300F &OD->list[63]
-#define OD_ENTRY_H6030 &OD->list[64]
-#define OD_ENTRY_H6031 &OD->list[65]
-#define OD_ENTRY_H6050 &OD->list[66]
-#define OD_ENTRY_H6092 &OD->list[67]
+#define OD_ENTRY_H3004 &OD->list[51]
+#define OD_ENTRY_H3005 &OD->list[52]
+#define OD_ENTRY_H3006 &OD->list[53]
+#define OD_ENTRY_H3007 &OD->list[54]
+#define OD_ENTRY_H3008 &OD->list[55]
+#define OD_ENTRY_H3009 &OD->list[56]
+#define OD_ENTRY_H300A &OD->list[57]
+#define OD_ENTRY_H300B &OD->list[58]
+#define OD_ENTRY_H300C &OD->list[59]
+#define OD_ENTRY_H300D &OD->list[60]
+#define OD_ENTRY_H300E &OD->list[61]
+#define OD_ENTRY_H300F &OD->list[62]
+#define OD_ENTRY_H6030 &OD->list[63]
+#define OD_ENTRY_H6031 &OD->list[64]
+#define OD_ENTRY_H6050 &OD->list[65]
+#define OD_ENTRY_H6092 &OD->list[66]
 
 
 /*******************************************************************************
@@ -411,24 +447,23 @@ extern OD_ATTR_OD OD_t *OD;
 #define OD_ENTRY_H280D_SW_AsmVersion &OD->list[47]
 #define OD_ENTRY_H3000_batteryEfficiencyChargeInVsDischargeOut &OD->list[48]
 #define OD_ENTRY_H3001_nominalSOH &OD->list[49]
-#define OD_ENTRY_H3002_remainingBatteryCyclesLeftForWarranty &OD->list[50]
-#define OD_ENTRY_H3003_accumulatedTimeInService &OD->list[51]
-#define OD_ENTRY_H3004_remainingHoursLeftForWarranty &OD->list[52]
-#define OD_ENTRY_H3005_BMS_Data &OD->list[53]
-#define OD_ENTRY_H3006_logOfFaultCodes &OD->list[54]
-#define OD_ENTRY_H3007_totalNumberOfChargeEvents &OD->list[55]
-#define OD_ENTRY_H3008_totalTimeReceivingCurrentInChargeMode &OD->list[56]
-#define OD_ENTRY_H3009_totalTimeInChargeMode &OD->list[57]
-#define OD_ENTRY_H300A_thermistors &OD->list[58]
-#define OD_ENTRY_H300B_cumulativeTotalDischargeKWh &OD->list[59]
-#define OD_ENTRY_H300C_energyRemainingForBatteryWarrantyKWh &OD->list[60]
-#define OD_ENTRY_H300D_cumulativeTotalBatteryRegenKWh &OD->list[61]
-#define OD_ENTRY_H300E_GPS_Derate &OD->list[62]
-#define OD_ENTRY_H300F_charger &OD->list[63]
-#define OD_ENTRY_H6030_batterySN &OD->list[64]
-#define OD_ENTRY_H6031_modelID &OD->list[65]
-#define OD_ENTRY_H6050_cumulativeTotalBatteryChargeKWh &OD->list[66]
-#define OD_ENTRY_H6092_totalBatteryRemainingEnergyKWh &OD->list[67]
+#define OD_ENTRY_H3002_lifetimeAvg &OD->list[50]
+#define OD_ENTRY_H3004_remainingHoursLeftForWarranty &OD->list[51]
+#define OD_ENTRY_H3005_BMS_Data &OD->list[52]
+#define OD_ENTRY_H3006_logOfFaultCodes &OD->list[53]
+#define OD_ENTRY_H3007_totalNumberOfChargeEvents &OD->list[54]
+#define OD_ENTRY_H3008_totalTimeReceivingCurrentInChargeMode &OD->list[55]
+#define OD_ENTRY_H3009_totalTimeInChargeMode &OD->list[56]
+#define OD_ENTRY_H300A_thermistors &OD->list[57]
+#define OD_ENTRY_H300B_cumulativeTotalDischargeKWh &OD->list[58]
+#define OD_ENTRY_H300C_energyRemainingForBatteryWarrantyKWh &OD->list[59]
+#define OD_ENTRY_H300D_cumulativeTotalBatteryRegenKWh &OD->list[60]
+#define OD_ENTRY_H300E_GPS_Derate &OD->list[61]
+#define OD_ENTRY_H300F_charger &OD->list[62]
+#define OD_ENTRY_H6030_batterySN &OD->list[63]
+#define OD_ENTRY_H6031_modelID &OD->list[64]
+#define OD_ENTRY_H6050_cumulativeTotalBatteryChargeKWh &OD->list[65]
+#define OD_ENTRY_H6092_totalBatteryRemainingEnergyKWh &OD->list[66]
 
 
 /*******************************************************************************
