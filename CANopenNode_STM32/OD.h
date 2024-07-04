@@ -14,18 +14,18 @@
         Project File: DS301_profile.xpd
         File Version: 3
 
-        Created:      2020/11/23 13:00:00
-        Created By:   
-        Modified:     2024/07/04 18:58:47
-        Modified By:  
+        Created:      2023/10/01 13:00:00
+        Created By:   RBM
+        Modified:     2024/07/04 20:15:42
+        Modified By:  RBM
 
     Device Info:
-        Vendor Name:  
+        Vendor Name:  Maxwell Spark
         Vendor ID:    
         Product Name: CANGrabR Open
         Product ID:   
 
-        Description:  
+        Description:  HYG Int
 *******************************************************************************/
 
 #ifndef OD_H
@@ -44,7 +44,7 @@
 #define OD_CNT_HB_PROD 1
 #define OD_CNT_SDO_SRV 1
 #define OD_CNT_SDO_CLI 1
-#define OD_CNT_RPDO 4
+#define OD_CNT_RPDO 1
 #define OD_CNT_TPDO 2
 
 
@@ -103,24 +103,6 @@ typedef struct {
         uint16_t eventTimer;
     } x1400_RPDOCommunicationParameter;
     struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDUsedByRPDO;
-        uint8_t transmissionType;
-        uint16_t eventTimer;
-    } x1401_RPDOCommunicationParameter;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDUsedByRPDO;
-        uint8_t transmissionType;
-        uint16_t eventTimer;
-    } x1402_RPDOCommunicationParameter;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDUsedByRPDO;
-        uint8_t transmissionType;
-        uint16_t eventTimer;
-    } x1403_RPDOCommunicationParameter;
-    struct {
         uint8_t numberOfMappedApplicationObjectsInPDO;
         uint32_t applicationObject1;
         uint32_t applicationObject2;
@@ -131,39 +113,6 @@ typedef struct {
         uint32_t applicationObject7;
         uint32_t applicationObject8;
     } x1600_RPDOMappingParameter;
-    struct {
-        uint8_t numberOfMappedApplicationObjectsInPDO;
-        uint32_t applicationObject1;
-        uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
-    } x1601_RPDOMappingParameter;
-    struct {
-        uint8_t numberOfMappedApplicationObjectsInPDO;
-        uint32_t applicationObject1;
-        uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
-    } x1602_RPDOMappingParameter;
-    struct {
-        uint8_t numberOfMappedApplicationObjectsInPDO;
-        uint32_t applicationObject1;
-        uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
-    } x1603_RPDOMappingParameter;
     struct {
         uint8_t highestSub_indexSupported;
         uint32_t COB_IDUsedByTPDO;
@@ -209,6 +158,11 @@ typedef struct {
     uint16_t x2007_CCL;
     uint16_t x2008_DVL;
     uint16_t x2009_CVL;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint8_t counter;
+        uint8_t reserved;
+    } x2100_mainTruckControllerCrossCheck;
     uint16_t x280C_totalNumberOfBatteryCycles;
     uint32_t x280D_SW_AsmVersion;
     uint8_t x3000_batteryEfficiencyChargeInVsDischargeOut;
@@ -346,52 +300,47 @@ extern OD_ATTR_OD OD_t *OD;
 #define OD_ENTRY_H1200 &OD->list[18]
 #define OD_ENTRY_H1280 &OD->list[19]
 #define OD_ENTRY_H1400 &OD->list[20]
-#define OD_ENTRY_H1401 &OD->list[21]
-#define OD_ENTRY_H1402 &OD->list[22]
-#define OD_ENTRY_H1403 &OD->list[23]
-#define OD_ENTRY_H1600 &OD->list[24]
-#define OD_ENTRY_H1601 &OD->list[25]
-#define OD_ENTRY_H1602 &OD->list[26]
-#define OD_ENTRY_H1603 &OD->list[27]
-#define OD_ENTRY_H1800 &OD->list[28]
-#define OD_ENTRY_H1801 &OD->list[29]
-#define OD_ENTRY_H1A00 &OD->list[30]
-#define OD_ENTRY_H1A01 &OD->list[31]
-#define OD_ENTRY_H1F80 &OD->list[32]
-#define OD_ENTRY_H1F81 &OD->list[33]
-#define OD_ENTRY_H1F82 &OD->list[34]
-#define OD_ENTRY_H1F89 &OD->list[35]
-#define OD_ENTRY_H2000 &OD->list[36]
-#define OD_ENTRY_H2001 &OD->list[37]
-#define OD_ENTRY_H2002 &OD->list[38]
-#define OD_ENTRY_H2003 &OD->list[39]
-#define OD_ENTRY_H2004 &OD->list[40]
-#define OD_ENTRY_H2005 &OD->list[41]
-#define OD_ENTRY_H2006 &OD->list[42]
-#define OD_ENTRY_H2007 &OD->list[43]
-#define OD_ENTRY_H2008 &OD->list[44]
-#define OD_ENTRY_H2009 &OD->list[45]
-#define OD_ENTRY_H280C &OD->list[46]
-#define OD_ENTRY_H280D &OD->list[47]
-#define OD_ENTRY_H3000 &OD->list[48]
-#define OD_ENTRY_H3001 &OD->list[49]
-#define OD_ENTRY_H3002 &OD->list[50]
-#define OD_ENTRY_H3004 &OD->list[51]
-#define OD_ENTRY_H3005 &OD->list[52]
-#define OD_ENTRY_H3006 &OD->list[53]
-#define OD_ENTRY_H3007 &OD->list[54]
-#define OD_ENTRY_H3008 &OD->list[55]
-#define OD_ENTRY_H3009 &OD->list[56]
-#define OD_ENTRY_H300A &OD->list[57]
-#define OD_ENTRY_H300B &OD->list[58]
-#define OD_ENTRY_H300C &OD->list[59]
-#define OD_ENTRY_H300D &OD->list[60]
-#define OD_ENTRY_H300E &OD->list[61]
-#define OD_ENTRY_H300F &OD->list[62]
-#define OD_ENTRY_H6030 &OD->list[63]
-#define OD_ENTRY_H6031 &OD->list[64]
-#define OD_ENTRY_H6050 &OD->list[65]
-#define OD_ENTRY_H6092 &OD->list[66]
+#define OD_ENTRY_H1600 &OD->list[21]
+#define OD_ENTRY_H1800 &OD->list[22]
+#define OD_ENTRY_H1801 &OD->list[23]
+#define OD_ENTRY_H1A00 &OD->list[24]
+#define OD_ENTRY_H1A01 &OD->list[25]
+#define OD_ENTRY_H1F80 &OD->list[26]
+#define OD_ENTRY_H1F81 &OD->list[27]
+#define OD_ENTRY_H1F82 &OD->list[28]
+#define OD_ENTRY_H1F89 &OD->list[29]
+#define OD_ENTRY_H2000 &OD->list[30]
+#define OD_ENTRY_H2001 &OD->list[31]
+#define OD_ENTRY_H2002 &OD->list[32]
+#define OD_ENTRY_H2003 &OD->list[33]
+#define OD_ENTRY_H2004 &OD->list[34]
+#define OD_ENTRY_H2005 &OD->list[35]
+#define OD_ENTRY_H2006 &OD->list[36]
+#define OD_ENTRY_H2007 &OD->list[37]
+#define OD_ENTRY_H2008 &OD->list[38]
+#define OD_ENTRY_H2009 &OD->list[39]
+#define OD_ENTRY_H2100 &OD->list[40]
+#define OD_ENTRY_H280C &OD->list[41]
+#define OD_ENTRY_H280D &OD->list[42]
+#define OD_ENTRY_H3000 &OD->list[43]
+#define OD_ENTRY_H3001 &OD->list[44]
+#define OD_ENTRY_H3002 &OD->list[45]
+#define OD_ENTRY_H3004 &OD->list[46]
+#define OD_ENTRY_H3005 &OD->list[47]
+#define OD_ENTRY_H3006 &OD->list[48]
+#define OD_ENTRY_H3007 &OD->list[49]
+#define OD_ENTRY_H3008 &OD->list[50]
+#define OD_ENTRY_H3009 &OD->list[51]
+#define OD_ENTRY_H300A &OD->list[52]
+#define OD_ENTRY_H300B &OD->list[53]
+#define OD_ENTRY_H300C &OD->list[54]
+#define OD_ENTRY_H300D &OD->list[55]
+#define OD_ENTRY_H300E &OD->list[56]
+#define OD_ENTRY_H300F &OD->list[57]
+#define OD_ENTRY_H6030 &OD->list[58]
+#define OD_ENTRY_H6031 &OD->list[59]
+#define OD_ENTRY_H6050 &OD->list[60]
+#define OD_ENTRY_H6092 &OD->list[61]
 
 
 /*******************************************************************************
@@ -418,52 +367,47 @@ extern OD_ATTR_OD OD_t *OD;
 #define OD_ENTRY_H1200_SDOServerParameter &OD->list[18]
 #define OD_ENTRY_H1280_SDOClientParameter &OD->list[19]
 #define OD_ENTRY_H1400_RPDOCommunicationParameter &OD->list[20]
-#define OD_ENTRY_H1401_RPDOCommunicationParameter &OD->list[21]
-#define OD_ENTRY_H1402_RPDOCommunicationParameter &OD->list[22]
-#define OD_ENTRY_H1403_RPDOCommunicationParameter &OD->list[23]
-#define OD_ENTRY_H1600_RPDOMappingParameter &OD->list[24]
-#define OD_ENTRY_H1601_RPDOMappingParameter &OD->list[25]
-#define OD_ENTRY_H1602_RPDOMappingParameter &OD->list[26]
-#define OD_ENTRY_H1603_RPDOMappingParameter &OD->list[27]
-#define OD_ENTRY_H1800_TPDOCommunicationParameter &OD->list[28]
-#define OD_ENTRY_H1801_TPDOCommunicationParameter &OD->list[29]
-#define OD_ENTRY_H1A00_TPDOMappingParameter &OD->list[30]
-#define OD_ENTRY_H1A01_TPDOMappingParameter &OD->list[31]
-#define OD_ENTRY_H1F80_NMTStartup &OD->list[32]
-#define OD_ENTRY_H1F81_slaveAssignment &OD->list[33]
-#define OD_ENTRY_H1F82_requestNMT &OD->list[34]
-#define OD_ENTRY_H1F89_bootTime &OD->list[35]
-#define OD_ENTRY_H2000_SOC &OD->list[36]
-#define OD_ENTRY_H2001_status &OD->list[37]
-#define OD_ENTRY_H2002_DCVolt &OD->list[38]
-#define OD_ENTRY_H2003_DCCurrent &OD->list[39]
-#define OD_ENTRY_H2004_sysTemp &OD->list[40]
-#define OD_ENTRY_H2005_thermDerate &OD->list[41]
-#define OD_ENTRY_H2006_DCL &OD->list[42]
-#define OD_ENTRY_H2007_CCL &OD->list[43]
-#define OD_ENTRY_H2008_DVL &OD->list[44]
-#define OD_ENTRY_H2009_CVL &OD->list[45]
-#define OD_ENTRY_H280C_totalNumberOfBatteryCycles &OD->list[46]
-#define OD_ENTRY_H280D_SW_AsmVersion &OD->list[47]
-#define OD_ENTRY_H3000_batteryEfficiencyChargeInVsDischargeOut &OD->list[48]
-#define OD_ENTRY_H3001_nominalSOH &OD->list[49]
-#define OD_ENTRY_H3002_lifetimeAvg &OD->list[50]
-#define OD_ENTRY_H3004_remainingHoursLeftForWarranty &OD->list[51]
-#define OD_ENTRY_H3005_BMS_Data &OD->list[52]
-#define OD_ENTRY_H3006_logOfFaultCodes &OD->list[53]
-#define OD_ENTRY_H3007_totalNumberOfChargeEvents &OD->list[54]
-#define OD_ENTRY_H3008_totalTimeReceivingCurrentInChargeMode &OD->list[55]
-#define OD_ENTRY_H3009_totalTimeInChargeMode &OD->list[56]
-#define OD_ENTRY_H300A_thermistors &OD->list[57]
-#define OD_ENTRY_H300B_cumulativeTotalDischargeKWh &OD->list[58]
-#define OD_ENTRY_H300C_energyRemainingForBatteryWarrantyKWh &OD->list[59]
-#define OD_ENTRY_H300D_cumulativeTotalBatteryRegenKWh &OD->list[60]
-#define OD_ENTRY_H300E_GPS_Derate &OD->list[61]
-#define OD_ENTRY_H300F_charger &OD->list[62]
-#define OD_ENTRY_H6030_batterySN &OD->list[63]
-#define OD_ENTRY_H6031_modelID &OD->list[64]
-#define OD_ENTRY_H6050_cumulativeTotalBatteryChargeKWh &OD->list[65]
-#define OD_ENTRY_H6092_totalBatteryRemainingEnergyKWh &OD->list[66]
+#define OD_ENTRY_H1600_RPDOMappingParameter &OD->list[21]
+#define OD_ENTRY_H1800_TPDOCommunicationParameter &OD->list[22]
+#define OD_ENTRY_H1801_TPDOCommunicationParameter &OD->list[23]
+#define OD_ENTRY_H1A00_TPDOMappingParameter &OD->list[24]
+#define OD_ENTRY_H1A01_TPDOMappingParameter &OD->list[25]
+#define OD_ENTRY_H1F80_NMTStartup &OD->list[26]
+#define OD_ENTRY_H1F81_slaveAssignment &OD->list[27]
+#define OD_ENTRY_H1F82_requestNMT &OD->list[28]
+#define OD_ENTRY_H1F89_bootTime &OD->list[29]
+#define OD_ENTRY_H2000_SOC &OD->list[30]
+#define OD_ENTRY_H2001_status &OD->list[31]
+#define OD_ENTRY_H2002_DCVolt &OD->list[32]
+#define OD_ENTRY_H2003_DCCurrent &OD->list[33]
+#define OD_ENTRY_H2004_sysTemp &OD->list[34]
+#define OD_ENTRY_H2005_thermDerate &OD->list[35]
+#define OD_ENTRY_H2006_DCL &OD->list[36]
+#define OD_ENTRY_H2007_CCL &OD->list[37]
+#define OD_ENTRY_H2008_DVL &OD->list[38]
+#define OD_ENTRY_H2009_CVL &OD->list[39]
+#define OD_ENTRY_H2100_mainTruckControllerCrossCheck &OD->list[40]
+#define OD_ENTRY_H280C_totalNumberOfBatteryCycles &OD->list[41]
+#define OD_ENTRY_H280D_SW_AsmVersion &OD->list[42]
+#define OD_ENTRY_H3000_batteryEfficiencyChargeInVsDischargeOut &OD->list[43]
+#define OD_ENTRY_H3001_nominalSOH &OD->list[44]
+#define OD_ENTRY_H3002_lifetimeAvg &OD->list[45]
+#define OD_ENTRY_H3004_remainingHoursLeftForWarranty &OD->list[46]
+#define OD_ENTRY_H3005_BMS_Data &OD->list[47]
+#define OD_ENTRY_H3006_logOfFaultCodes &OD->list[48]
+#define OD_ENTRY_H3007_totalNumberOfChargeEvents &OD->list[49]
+#define OD_ENTRY_H3008_totalTimeReceivingCurrentInChargeMode &OD->list[50]
+#define OD_ENTRY_H3009_totalTimeInChargeMode &OD->list[51]
+#define OD_ENTRY_H300A_thermistors &OD->list[52]
+#define OD_ENTRY_H300B_cumulativeTotalDischargeKWh &OD->list[53]
+#define OD_ENTRY_H300C_energyRemainingForBatteryWarrantyKWh &OD->list[54]
+#define OD_ENTRY_H300D_cumulativeTotalBatteryRegenKWh &OD->list[55]
+#define OD_ENTRY_H300E_GPS_Derate &OD->list[56]
+#define OD_ENTRY_H300F_charger &OD->list[57]
+#define OD_ENTRY_H6030_batterySN &OD->list[58]
+#define OD_ENTRY_H6031_modelID &OD->list[59]
+#define OD_ENTRY_H6050_cumulativeTotalBatteryChargeKWh &OD->list[60]
+#define OD_ENTRY_H6092_totalBatteryRemainingEnergyKWh &OD->list[61]
 
 
 /*******************************************************************************
