@@ -114,11 +114,26 @@ OD_ATTR_RAM OD_RAM_t OD_RAM = {
         .counter = 0x00,
         .reserved = 0x00
     },
-    .x280C_totalNumberOfBatteryCycles = 0x0000,
-    .x280D_SW_AsmVersion = 0x00000000,
-    .x3000_batteryEfficiencyChargeInVsDischargeOut = 0x00,
-    .x3001_nominalSOH_sub0 = 0x04,
-    .x3001_nominalSOH = {0x0000, 0x0000, 0x0000, 0x0000},
+    .x280C_totalNumberOfBatteryCycles = {
+        .highestSub_indexSupported = 0x01,
+        .totalNumberOfBatteryCycles = 0x0000
+    },
+    .x280D_SW_AsmVersion = {
+        .highestSub_indexSupported = 0x02,
+        .SWAV1 = 0x00000000,
+        .SW_AsmVersion = 0x00000000
+    },
+    .x3000_batteryEfficiencyChargeInVsDischargeOut = {
+        .highestSub_indexSupported = 0x01,
+        .batteryEfficiencyChargeInVsDischargeOut = 0x00
+    },
+    .x3001_nominalSOH = {
+        .highestSub_indexSupported = 0x04,
+        .nominalBatteryEnergyKWh = 0x00000000,
+        .nominalBatteryVoltageV = 0x0000,
+        .SOH_WarrantyValuePercentOfBeginningLifeOfCapacityAh = 0x0000,
+        .SOH_RunningValuePercentOfBeginningLifeOfCapacityAh = 0x0000
+    },
     .x3002_lifetimeAvg = {
         .highestSub_indexSupported = 0x05,
         .remainingBatteryCyclesLeftForWarranty = 0x0000,
@@ -127,7 +142,10 @@ OD_ATTR_RAM OD_RAM_t OD_RAM = {
         .lifetimeAverageChargeRate = 0x0000,
         .lifetimeAverageDischargeRate = 0x0000
     },
-    .x3004_remainingHoursLeftForWarranty = 0x00000000,
+    .x3004_remainingHoursLeftForWarranty = {
+        .highestSub_indexSupported = 0x01,
+        .remainingHoursLeftForWarranty = 0x00000000
+    },
     .x3005_BMS_Data = {
         .highestSub_indexSupported = 0x0B,
         .BMS_InternalTemperature = -40,
@@ -165,17 +183,45 @@ OD_ATTR_RAM OD_RAM_t OD_RAM = {
         .totalNumberOfChargeEvents = 0x00000000,
         .timestamp4thHighestPriorityPreviouslyActiveError = 0x00000000
     },
-    .x3008_totalTimeReceivingCurrentInChargeMode = 0x00000000,
-    .x3009_totalTimeInChargeMode = 0x00000000,
+    .x3008_totalTimeReceivingCurrentInChargeMode = {
+        .highestSub_indexSupported = 0x01,
+        .totalTimeReceivingCurrentInChargeMode = 0x00000000
+    },
+    .x3009_totalTimeInChargeMode = {
+        .highestSub_indexSupported = 0x01,
+        .totalTimeInChargeMode = 0x00000000
+    },
     .x300A_thermistors_sub0 = 0x04,
     .x300A_thermistors = {511, 511, 511, 511},
-    .x300B_cumulativeTotalDischargeKWh = 0x00000000,
-    .x300C_energyRemainingForBatteryWarrantyKWh = 0x00000000,
-    .x300D_cumulativeTotalBatteryRegenKWh = 0x00000000,
-    .x300E_GPS_Derate_sub0 = 0x05,
-    .x300E_GPS_Derate = {0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
-    .x300F_charger_sub0 = 0x06,
-    .x300F_charger = {0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
+    .x300B_cumulativeTotalDischargeKWh = {
+        .highestSub_indexSupported = 0x01,
+        .cumulativeTotalDischargeKWh = 0x00000000
+    },
+    .x300C_energyRemainingForBatteryWarrantyKWh = {
+        .highestSub_indexSupported = 0x01,
+        .energyRemainingForBatteryWarrantyKWh = 0x00000000
+    },
+    .x300D_cumulativeTotalBatteryRegenKWh = {
+        .highestSub_indexSupported = 0x01,
+        .cumulativeTotalBatteryRegenKWh = 0x00000000
+    },
+    .x300E_GPS_Derate = {
+        .highestSub_indexSupported = 0x05,
+        .GPS_Location = 0x00000000,
+        .GPS_CAN_ProtocolSpecificationRev = 0x00,
+        .highTemperatureDerateStartC_F_Discharge = 0x0000,
+        .lowTemperatureDerateStartC_F_Discharge = 0,
+        .liftLockoutStartCSOC = 0x0000
+    },
+    .x300F_chargerStats = {
+        .highestSub_indexSupported = 0x06,
+        .totalNumberOfChargerFaults = 0x00000000,
+        .numberOfChargesCompletedWithoutCellBalancing = 0x00000000,
+        .timestampOfLastChargeCompletedWithoutCellBalancing = 0x00000000,
+        .numberOfChargesCompletedWithCellBalancing = 0x00000000,
+        .timestampOfLastChargeCompletedWithCellBalancing = 0x00000000,
+        .warrantableBatteryEnergyKWh = 0x00000000
+    },
     .x6030_batterySN_sub0 = 0x05,
     .x6030_batterySN = {0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000005},
     .x6031_modelID_sub0 = 0x08,
@@ -253,23 +299,23 @@ typedef struct {
     OD_obj_var_t o_2008_DVL;
     OD_obj_var_t o_2009_CVL;
     OD_obj_record_t o_2100_mainTruckControllerCrossCheck[3];
-    OD_obj_var_t o_280C_totalNumberOfBatteryCycles;
-    OD_obj_var_t o_280D_SW_AsmVersion;
-    OD_obj_var_t o_3000_batteryEfficiencyChargeInVsDischargeOut;
-    OD_obj_array_t o_3001_nominalSOH;
+    OD_obj_record_t o_280C_totalNumberOfBatteryCycles[2];
+    OD_obj_record_t o_280D_SW_AsmVersion[3];
+    OD_obj_record_t o_3000_batteryEfficiencyChargeInVsDischargeOut[2];
+    OD_obj_record_t o_3001_nominalSOH[5];
     OD_obj_record_t o_3002_lifetimeAvg[6];
-    OD_obj_var_t o_3004_remainingHoursLeftForWarranty;
+    OD_obj_record_t o_3004_remainingHoursLeftForWarranty[2];
     OD_obj_record_t o_3005_BMS_Data[12];
     OD_obj_record_t o_3006_logOfFaultCodes[16];
     OD_obj_record_t o_3007_totalNumberOfChargeEvents[3];
-    OD_obj_var_t o_3008_totalTimeReceivingCurrentInChargeMode;
-    OD_obj_var_t o_3009_totalTimeInChargeMode;
+    OD_obj_record_t o_3008_totalTimeReceivingCurrentInChargeMode[2];
+    OD_obj_record_t o_3009_totalTimeInChargeMode[2];
     OD_obj_array_t o_300A_thermistors;
-    OD_obj_var_t o_300B_cumulativeTotalDischargeKWh;
-    OD_obj_var_t o_300C_energyRemainingForBatteryWarrantyKWh;
-    OD_obj_var_t o_300D_cumulativeTotalBatteryRegenKWh;
-    OD_obj_array_t o_300E_GPS_Derate;
-    OD_obj_array_t o_300F_charger;
+    OD_obj_record_t o_300B_cumulativeTotalDischargeKWh[2];
+    OD_obj_record_t o_300C_energyRemainingForBatteryWarrantyKWh[2];
+    OD_obj_record_t o_300D_cumulativeTotalBatteryRegenKWh[2];
+    OD_obj_record_t o_300E_GPS_Derate[6];
+    OD_obj_record_t o_300F_chargerStats[7];
     OD_obj_array_t o_6030_batterySN;
     OD_obj_array_t o_6031_modelID;
     OD_obj_var_t o_6050_cumulativeTotalBatteryChargeKWh;
@@ -822,27 +868,84 @@ static CO_PROGMEM ODObjs_t ODObjs = {
         }
     },
     .o_280C_totalNumberOfBatteryCycles = {
-        .dataOrig = &OD_RAM.x280C_totalNumberOfBatteryCycles,
-        .attribute = ODA_SDO_R | ODA_MB,
-        .dataLength = 2
+        {
+            .dataOrig = &OD_RAM.x280C_totalNumberOfBatteryCycles.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x280C_totalNumberOfBatteryCycles.totalNumberOfBatteryCycles,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 2
+        }
     },
     .o_280D_SW_AsmVersion = {
-        .dataOrig = &OD_RAM.x280D_SW_AsmVersion,
-        .attribute = ODA_SDO_R | ODA_MB,
-        .dataLength = 4
+        {
+            .dataOrig = &OD_RAM.x280D_SW_AsmVersion.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x280D_SW_AsmVersion.SWAV1,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        },
+        {
+            .dataOrig = &OD_RAM.x280D_SW_AsmVersion.SW_AsmVersion,
+            .subIndex = 2,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        }
     },
     .o_3000_batteryEfficiencyChargeInVsDischargeOut = {
-        .dataOrig = &OD_RAM.x3000_batteryEfficiencyChargeInVsDischargeOut,
-        .attribute = ODA_SDO_R,
-        .dataLength = 1
+        {
+            .dataOrig = &OD_RAM.x3000_batteryEfficiencyChargeInVsDischargeOut.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x3000_batteryEfficiencyChargeInVsDischargeOut.batteryEfficiencyChargeInVsDischargeOut,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        }
     },
     .o_3001_nominalSOH = {
-        .dataOrig0 = &OD_RAM.x3001_nominalSOH_sub0,
-        .dataOrig = &OD_RAM.x3001_nominalSOH[0],
-        .attribute0 = ODA_SDO_R,
-        .attribute = ODA_SDO_R | ODA_MB,
-        .dataElementLength = 2,
-        .dataElementSizeof = sizeof(uint16_t)
+        {
+            .dataOrig = &OD_RAM.x3001_nominalSOH.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x3001_nominalSOH.nominalBatteryEnergyKWh,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        },
+        {
+            .dataOrig = &OD_RAM.x3001_nominalSOH.nominalBatteryVoltageV,
+            .subIndex = 2,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 2
+        },
+        {
+            .dataOrig = &OD_RAM.x3001_nominalSOH.SOH_WarrantyValuePercentOfBeginningLifeOfCapacityAh,
+            .subIndex = 3,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 2
+        },
+        {
+            .dataOrig = &OD_RAM.x3001_nominalSOH.SOH_RunningValuePercentOfBeginningLifeOfCapacityAh,
+            .subIndex = 4,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 2
+        }
     },
     .o_3002_lifetimeAvg = {
         {
@@ -883,9 +986,18 @@ static CO_PROGMEM ODObjs_t ODObjs = {
         }
     },
     .o_3004_remainingHoursLeftForWarranty = {
-        .dataOrig = &OD_RAM.x3004_remainingHoursLeftForWarranty,
-        .attribute = ODA_SDO_RW | ODA_MB,
-        .dataLength = 4
+        {
+            .dataOrig = &OD_RAM.x3004_remainingHoursLeftForWarranty.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x3004_remainingHoursLeftForWarranty.remainingHoursLeftForWarranty,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        }
     },
     .o_3005_BMS_Data = {
         {
@@ -1080,14 +1192,32 @@ static CO_PROGMEM ODObjs_t ODObjs = {
         }
     },
     .o_3008_totalTimeReceivingCurrentInChargeMode = {
-        .dataOrig = &OD_RAM.x3008_totalTimeReceivingCurrentInChargeMode,
-        .attribute = ODA_SDO_R | ODA_MB,
-        .dataLength = 4
+        {
+            .dataOrig = &OD_RAM.x3008_totalTimeReceivingCurrentInChargeMode.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x3008_totalTimeReceivingCurrentInChargeMode.totalTimeReceivingCurrentInChargeMode,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        }
     },
     .o_3009_totalTimeInChargeMode = {
-        .dataOrig = &OD_RAM.x3009_totalTimeInChargeMode,
-        .attribute = ODA_SDO_R | ODA_MB,
-        .dataLength = 4
+        {
+            .dataOrig = &OD_RAM.x3009_totalTimeInChargeMode.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x3009_totalTimeInChargeMode.totalTimeInChargeMode,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        }
     },
     .o_300A_thermistors = {
         .dataOrig0 = &OD_RAM.x300A_thermistors_sub0,
@@ -1098,35 +1228,128 @@ static CO_PROGMEM ODObjs_t ODObjs = {
         .dataElementSizeof = sizeof(int16_t)
     },
     .o_300B_cumulativeTotalDischargeKWh = {
-        .dataOrig = &OD_RAM.x300B_cumulativeTotalDischargeKWh,
-        .attribute = ODA_SDO_R | ODA_MB,
-        .dataLength = 4
+        {
+            .dataOrig = &OD_RAM.x300B_cumulativeTotalDischargeKWh.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x300B_cumulativeTotalDischargeKWh.cumulativeTotalDischargeKWh,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        }
     },
     .o_300C_energyRemainingForBatteryWarrantyKWh = {
-        .dataOrig = &OD_RAM.x300C_energyRemainingForBatteryWarrantyKWh,
-        .attribute = ODA_SDO_R | ODA_MB,
-        .dataLength = 4
+        {
+            .dataOrig = &OD_RAM.x300C_energyRemainingForBatteryWarrantyKWh.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x300C_energyRemainingForBatteryWarrantyKWh.energyRemainingForBatteryWarrantyKWh,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        }
     },
     .o_300D_cumulativeTotalBatteryRegenKWh = {
-        .dataOrig = &OD_RAM.x300D_cumulativeTotalBatteryRegenKWh,
-        .attribute = ODA_SDO_R | ODA_MB,
-        .dataLength = 4
+        {
+            .dataOrig = &OD_RAM.x300D_cumulativeTotalBatteryRegenKWh.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x300D_cumulativeTotalBatteryRegenKWh.cumulativeTotalBatteryRegenKWh,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        }
     },
     .o_300E_GPS_Derate = {
-        .dataOrig0 = &OD_RAM.x300E_GPS_Derate_sub0,
-        .dataOrig = &OD_RAM.x300E_GPS_Derate[0],
-        .attribute0 = ODA_SDO_R,
-        .attribute = ODA_SDO_R | ODA_MB,
-        .dataElementLength = 4,
-        .dataElementSizeof = sizeof(uint32_t)
+        {
+            .dataOrig = &OD_RAM.x300E_GPS_Derate.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x300E_GPS_Derate.GPS_Location,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        },
+        {
+            .dataOrig = &OD_RAM.x300E_GPS_Derate.GPS_CAN_ProtocolSpecificationRev,
+            .subIndex = 2,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x300E_GPS_Derate.highTemperatureDerateStartC_F_Discharge,
+            .subIndex = 3,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 2
+        },
+        {
+            .dataOrig = &OD_RAM.x300E_GPS_Derate.lowTemperatureDerateStartC_F_Discharge,
+            .subIndex = 4,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 2
+        },
+        {
+            .dataOrig = &OD_RAM.x300E_GPS_Derate.liftLockoutStartCSOC,
+            .subIndex = 5,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 2
+        }
     },
-    .o_300F_charger = {
-        .dataOrig0 = &OD_RAM.x300F_charger_sub0,
-        .dataOrig = &OD_RAM.x300F_charger[0],
-        .attribute0 = ODA_SDO_R,
-        .attribute = ODA_SDO_R | ODA_MB,
-        .dataElementLength = 4,
-        .dataElementSizeof = sizeof(uint32_t)
+    .o_300F_chargerStats = {
+        {
+            .dataOrig = &OD_RAM.x300F_chargerStats.highestSub_indexSupported,
+            .subIndex = 0,
+            .attribute = ODA_SDO_R,
+            .dataLength = 1
+        },
+        {
+            .dataOrig = &OD_RAM.x300F_chargerStats.totalNumberOfChargerFaults,
+            .subIndex = 1,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        },
+        {
+            .dataOrig = &OD_RAM.x300F_chargerStats.numberOfChargesCompletedWithoutCellBalancing,
+            .subIndex = 2,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        },
+        {
+            .dataOrig = &OD_RAM.x300F_chargerStats.timestampOfLastChargeCompletedWithoutCellBalancing,
+            .subIndex = 3,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        },
+        {
+            .dataOrig = &OD_RAM.x300F_chargerStats.numberOfChargesCompletedWithCellBalancing,
+            .subIndex = 4,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        },
+        {
+            .dataOrig = &OD_RAM.x300F_chargerStats.timestampOfLastChargeCompletedWithCellBalancing,
+            .subIndex = 5,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        },
+        {
+            .dataOrig = &OD_RAM.x300F_chargerStats.warrantableBatteryEnergyKWh,
+            .subIndex = 6,
+            .attribute = ODA_SDO_R | ODA_MB,
+            .dataLength = 4
+        }
     },
     .o_6030_batterySN = {
         .dataOrig0 = &OD_RAM.x6030_batterySN_sub0,
@@ -1202,23 +1425,23 @@ static OD_ATTR_OD OD_entry_t ODList[] = {
     {0x2008, 0x01, ODT_VAR, &ODObjs.o_2008_DVL, NULL},
     {0x2009, 0x01, ODT_VAR, &ODObjs.o_2009_CVL, NULL},
     {0x2100, 0x03, ODT_REC, &ODObjs.o_2100_mainTruckControllerCrossCheck, NULL},
-    {0x280C, 0x01, ODT_VAR, &ODObjs.o_280C_totalNumberOfBatteryCycles, NULL},
-    {0x280D, 0x01, ODT_VAR, &ODObjs.o_280D_SW_AsmVersion, NULL},
-    {0x3000, 0x01, ODT_VAR, &ODObjs.o_3000_batteryEfficiencyChargeInVsDischargeOut, NULL},
-    {0x3001, 0x05, ODT_ARR, &ODObjs.o_3001_nominalSOH, NULL},
+    {0x280C, 0x02, ODT_REC, &ODObjs.o_280C_totalNumberOfBatteryCycles, NULL},
+    {0x280D, 0x03, ODT_REC, &ODObjs.o_280D_SW_AsmVersion, NULL},
+    {0x3000, 0x02, ODT_REC, &ODObjs.o_3000_batteryEfficiencyChargeInVsDischargeOut, NULL},
+    {0x3001, 0x05, ODT_REC, &ODObjs.o_3001_nominalSOH, NULL},
     {0x3002, 0x06, ODT_REC, &ODObjs.o_3002_lifetimeAvg, NULL},
-    {0x3004, 0x01, ODT_VAR, &ODObjs.o_3004_remainingHoursLeftForWarranty, NULL},
+    {0x3004, 0x02, ODT_REC, &ODObjs.o_3004_remainingHoursLeftForWarranty, NULL},
     {0x3005, 0x0C, ODT_REC, &ODObjs.o_3005_BMS_Data, NULL},
     {0x3006, 0x10, ODT_REC, &ODObjs.o_3006_logOfFaultCodes, NULL},
     {0x3007, 0x03, ODT_REC, &ODObjs.o_3007_totalNumberOfChargeEvents, NULL},
-    {0x3008, 0x01, ODT_VAR, &ODObjs.o_3008_totalTimeReceivingCurrentInChargeMode, NULL},
-    {0x3009, 0x01, ODT_VAR, &ODObjs.o_3009_totalTimeInChargeMode, NULL},
+    {0x3008, 0x02, ODT_REC, &ODObjs.o_3008_totalTimeReceivingCurrentInChargeMode, NULL},
+    {0x3009, 0x02, ODT_REC, &ODObjs.o_3009_totalTimeInChargeMode, NULL},
     {0x300A, 0x05, ODT_ARR, &ODObjs.o_300A_thermistors, NULL},
-    {0x300B, 0x01, ODT_VAR, &ODObjs.o_300B_cumulativeTotalDischargeKWh, NULL},
-    {0x300C, 0x01, ODT_VAR, &ODObjs.o_300C_energyRemainingForBatteryWarrantyKWh, NULL},
-    {0x300D, 0x01, ODT_VAR, &ODObjs.o_300D_cumulativeTotalBatteryRegenKWh, NULL},
-    {0x300E, 0x06, ODT_ARR, &ODObjs.o_300E_GPS_Derate, NULL},
-    {0x300F, 0x07, ODT_ARR, &ODObjs.o_300F_charger, NULL},
+    {0x300B, 0x02, ODT_REC, &ODObjs.o_300B_cumulativeTotalDischargeKWh, NULL},
+    {0x300C, 0x02, ODT_REC, &ODObjs.o_300C_energyRemainingForBatteryWarrantyKWh, NULL},
+    {0x300D, 0x02, ODT_REC, &ODObjs.o_300D_cumulativeTotalBatteryRegenKWh, NULL},
+    {0x300E, 0x06, ODT_REC, &ODObjs.o_300E_GPS_Derate, NULL},
+    {0x300F, 0x07, ODT_REC, &ODObjs.o_300F_chargerStats, NULL},
     {0x6030, 0x06, ODT_ARR, &ODObjs.o_6030_batterySN, NULL},
     {0x6031, 0x09, ODT_ARR, &ODObjs.o_6031_modelID, NULL},
     {0x6050, 0x01, ODT_VAR, &ODObjs.o_6050_cumulativeTotalBatteryChargeKWh, NULL},

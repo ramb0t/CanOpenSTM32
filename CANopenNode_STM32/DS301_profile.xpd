@@ -15,7 +15,7 @@
         <ProfileTechnology>CANopen</ProfileTechnology>
       </ISO15745Reference>
     </ProfileHeader>
-    <ProfileBody xmlns:q1="http://www.canopen.org/xml/1.1" xsi:type="q1:ProfileBody_Device_CANopen" formatName="CANopen" formatVersion="1.0" fileName="DS301_profile.xpd" fileCreator="RBM" fileCreationDate="2023-10-01" fileCreationTime="13:00:00.0000000+02:00" fileModifiedBy="RBM" fileModificationDate="2024-07-04" fileModificationTime="20:16:12.5973816+02:00" fileVersion="3" supportedLanguages="en" xmlns="">
+    <ProfileBody xmlns:q1="http://www.canopen.org/xml/1.1" xsi:type="q1:ProfileBody_Device_CANopen" formatName="CANopen" formatVersion="1.0" fileName="DS301_profile.xpd" fileCreator="RBM" fileCreationDate="2023-10-01" fileCreationTime="13:00:00.0000000+02:00" fileModifiedBy="RBM" fileModificationDate="2024-08-29" fileModificationTime="23:19:03.3312605+02:00" fileVersion="6" supportedLanguages="en" xmlns="">
       <q1:DeviceIdentity>
         <q1:vendorName>Maxwell Spark</q1:vendorName>
         <q1:vendorID></q1:vendorID>
@@ -91,21 +91,9 @@
             <q1:subrange lowerLimit="0" upperLimit="127" />
             <USINT />
           </q1:array>
-          <q1:array name="Nominal SOH" uniqueID="UID_ARR_3001">
-            <q1:subrange lowerLimit="0" upperLimit="4" />
-            <UINT />
-          </q1:array>
           <q1:array name="Thermistors" uniqueID="UID_ARR_300A">
             <q1:subrange lowerLimit="0" upperLimit="4" />
             <INT />
-          </q1:array>
-          <q1:array name="GPS Derate" uniqueID="UID_ARR_300E">
-            <q1:subrange lowerLimit="0" upperLimit="5" />
-            <UDINT />
-          </q1:array>
-          <q1:array name="Charger" uniqueID="UID_ARR_300F">
-            <q1:subrange lowerLimit="0" upperLimit="6" />
-            <UDINT />
           </q1:array>
           <q1:array name="BatterySN" uniqueID="UID_ARR_6030">
             <q1:subrange lowerLimit="0" upperLimit="5" />
@@ -351,6 +339,50 @@
               <USINT />
             </q1:varDeclaration>
           </q1:struct>
+          <q1:struct name="Total Number of Battery Cycles" uniqueID="UID_REC_280C">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_280C00">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Total Number of Battery Cycles" uniqueID="UID_RECSUB_280C01">
+              <UINT />
+            </q1:varDeclaration>
+          </q1:struct>
+          <q1:struct name="SW Asm Version" uniqueID="UID_REC_280D">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_280D00">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="SWAV1" uniqueID="UID_RECSUB_280D01">
+              <UDINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="SW Asm Version" uniqueID="UID_RECSUB_280D02">
+              <UDINT />
+            </q1:varDeclaration>
+          </q1:struct>
+          <q1:struct name="Battery Efficiency, Charge In vs. Discharge out" uniqueID="UID_REC_3000">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_300000">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Battery Efficiency, Charge In vs. Discharge out" uniqueID="UID_RECSUB_300001">
+              <USINT />
+            </q1:varDeclaration>
+          </q1:struct>
+          <q1:struct name="Nominal SOH" uniqueID="UID_REC_3001">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_300100">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Nominal Battery Energy (kWh)" uniqueID="UID_RECSUB_300101">
+              <UDINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Nominal Battery Voltage (V)" uniqueID="UID_RECSUB_300102">
+              <UINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="SOH, Warranty Value, percent of beginning life of Capacity (Ah)" uniqueID="UID_RECSUB_300103">
+              <UINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="SOH, Running Value, percent of beginning life of Capacity (Ah)" uniqueID="UID_RECSUB_300104">
+              <UINT />
+            </q1:varDeclaration>
+          </q1:struct>
           <q1:struct name="Lifetime Avg" uniqueID="UID_REC_3002">
             <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_300200">
               <USINT />
@@ -369,6 +401,14 @@
             </q1:varDeclaration>
             <q1:varDeclaration name="Lifetime Average Discharge Rate" uniqueID="UID_RECSUB_300205">
               <UINT />
+            </q1:varDeclaration>
+          </q1:struct>
+          <q1:struct name="Remaining hours left for warranty" uniqueID="UID_REC_3004">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_300400">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Remaining hours left for warranty" uniqueID="UID_RECSUB_300401">
+              <UDINT />
             </q1:varDeclaration>
           </q1:struct>
           <q1:struct name="BMS Data" uniqueID="UID_REC_3005">
@@ -467,6 +507,89 @@
               <UDINT />
             </q1:varDeclaration>
             <q1:varDeclaration name="Timestamp 4th highest priority previously active error" uniqueID="UID_RECSUB_300702">
+              <UDINT />
+            </q1:varDeclaration>
+          </q1:struct>
+          <q1:struct name="Total time receiving current in Charge mode" uniqueID="UID_REC_3008">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_300800">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Total time receiving current in Charge mode" uniqueID="UID_RECSUB_300801">
+              <UDINT />
+            </q1:varDeclaration>
+          </q1:struct>
+          <q1:struct name="Total time in Charge Mode" uniqueID="UID_REC_3009">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_300900">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Total time in Charge Mode" uniqueID="UID_RECSUB_300901">
+              <UDINT />
+            </q1:varDeclaration>
+          </q1:struct>
+          <q1:struct name="Cumulative Total Discharge kWh" uniqueID="UID_REC_300B">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_300B00">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Cumulative Total Discharge kWh" uniqueID="UID_RECSUB_300B01">
+              <UDINT />
+            </q1:varDeclaration>
+          </q1:struct>
+          <q1:struct name="Energy remaining for Battery Warranty (kWh)" uniqueID="UID_REC_300C">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_300C00">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Energy remaining for Battery Warranty (kWh)" uniqueID="UID_RECSUB_300C01">
+              <UDINT />
+            </q1:varDeclaration>
+          </q1:struct>
+          <q1:struct name="Cumulative Total Battery Regen kWh" uniqueID="UID_REC_300D">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_300D00">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Cumulative Total Battery Regen kWh" uniqueID="UID_RECSUB_300D01">
+              <UDINT />
+            </q1:varDeclaration>
+          </q1:struct>
+          <q1:struct name="GPS/Derate" uniqueID="UID_REC_300E">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_300E00">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="GPS Location" uniqueID="UID_RECSUB_300E01">
+              <UDINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="GPS CAN Protocol Specification Rev" uniqueID="UID_RECSUB_300E02">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="High Temperature Derate Start (°C/°F) – Discharge" uniqueID="UID_RECSUB_300E03">
+              <UINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Low Temperature Derate Start (°C/°F) – Discharge" uniqueID="UID_RECSUB_300E04">
+              <INT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Lift Lockout Start (CSOC%)" uniqueID="UID_RECSUB_300E05">
+              <UINT />
+            </q1:varDeclaration>
+          </q1:struct>
+          <q1:struct name="Charger Stats" uniqueID="UID_REC_300F">
+            <q1:varDeclaration name="Highest sub-index supported" uniqueID="UID_RECSUB_300F00">
+              <USINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Total Number of Charger Faults" uniqueID="UID_RECSUB_300F01">
+              <UDINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Number of Charges Completed without cell Balancing" uniqueID="UID_RECSUB_300F02">
+              <UDINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Timestamp of Last Charge Completed without Cell Balancing" uniqueID="UID_RECSUB_300F03">
+              <UDINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Number of Charges Completed with cell Balancing" uniqueID="UID_RECSUB_300F04">
+              <UDINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Timestamp of Last Charge Completed with Cell Balancing" uniqueID="UID_RECSUB_300F05">
+              <UDINT />
+            </q1:varDeclaration>
+            <q1:varDeclaration name="Warrantable Battery Energy (kWh)" uniqueID="UID_RECSUB_300F06">
               <UDINT />
             </q1:varDeclaration>
           </q1:struct>
@@ -2556,22 +2679,60 @@ value has the following interpretation:</description>
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_280C">
             <label lang="en">Total Number of Battery Cycles</label>
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_280C" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_280C00">
+            <label lang="en">Highest sub-index supported</label>
+            <USINT />
+            <q1:defaultValue value="0x01" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_280C01">
+            <label lang="en">Total Number of Battery Cycles</label>
             <UINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_280D">
             <label lang="en">SW Asm Version</label>
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_280D" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_280D00">
+            <label lang="en">Highest sub-index supported</label>
+            <USINT />
+            <q1:defaultValue value="0x02" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_280D01">
+            <label lang="en">SWAV1</label>
+            <UDINT />
+            <q1:defaultValue value="0" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_280D02">
+            <label lang="en">SW Asm Version</label>
             <UDINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_3000">
+            <label lang="en">Battery Efficiency, Charge In vs. Discharge out</label>
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_3000" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300000">
+            <label lang="en">Highest sub-index supported</label>
+            <USINT />
+            <q1:defaultValue value="0x01" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300001">
             <description lang="en">1%/bit</description>
             <USINT />
             <q1:defaultValue value="0" />
+            <q1:allowedValues>
+              <q1:range>
+                <minValue value="0" />
+                <maxValue value="100" />
+              </q1:range>
+            </q1:allowedValues>
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_3001">
             <label lang="en">Nominal SOH</label>
-            <q1:dataTypeIDRef uniqueIDRef="UID_ARR_3001" />
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_3001" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300100">
             <label lang="en">Highest sub-index supported</label>
@@ -2580,11 +2741,11 @@ value has the following interpretation:</description>
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300101">
             <description lang="en">0.125 kWh</description>
-            <UINT />
+            <UDINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300102">
-            <description lang="en">0.125V</description>
+            <description lang="en">0.125 V</description>
             <UINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
@@ -2632,8 +2793,17 @@ value has the following interpretation:</description>
             <UINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
-          <q1:parameter uniqueID="UID_OBJ_3004" access="readWrite">
-            <description lang="en">1 hour/bit</description>
+          <q1:parameter uniqueID="UID_OBJ_3004">
+            <label lang="en">Remaining hours left for warranty</label>
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_3004" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300400">
+            <label lang="en">Highest sub-index supported</label>
+            <USINT />
+            <q1:defaultValue value="0x01" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300401">
+            <description lang="en">1hr/bit</description>
             <UDINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
@@ -2806,11 +2976,29 @@ value has the following interpretation:</description>
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_3008">
             <label lang="en">Total time receiving current in Charge mode</label>
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_3008" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300800">
+            <label lang="en">Highest sub-index supported</label>
+            <USINT />
+            <q1:defaultValue value="0x01" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300801">
+            <description lang="en">1hr/bit</description>
             <UDINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_3009">
             <label lang="en">Total time in Charge Mode</label>
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_3009" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300900">
+            <label lang="en">Highest sub-index supported</label>
+            <USINT />
+            <q1:defaultValue value="0x01" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300901">
+            <description lang="en">1hr/bit</description>
             <UDINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
@@ -2824,43 +3012,94 @@ value has the following interpretation:</description>
             <q1:defaultValue value="0x04" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300A01">
-            <label lang="en">Thermistor 1</label>
+            <description lang="en">0.125'C/bit</description>
             <INT />
             <q1:defaultValue value="0x1FF" />
+            <q1:allowedValues>
+              <q1:range>
+                <minValue value="-40" />
+                <maxValue value="125" />
+              </q1:range>
+            </q1:allowedValues>
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300A02">
-            <label lang="en">Thermistor 2</label>
+            <description lang="en">0.125'C/bit</description>
             <INT />
             <q1:defaultValue value="0x1FF" />
+            <q1:allowedValues>
+              <q1:range>
+                <minValue value="-40" />
+                <maxValue value="125" />
+              </q1:range>
+            </q1:allowedValues>
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300A03">
-            <label lang="en">Thermistor sub 1</label>
+            <description lang="en">0.125'C/bit</description>
             <INT />
             <q1:defaultValue value="0x1FF" />
+            <q1:allowedValues>
+              <q1:range>
+                <minValue value="-40" />
+                <maxValue value="125" />
+              </q1:range>
+            </q1:allowedValues>
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300A04">
-            <label lang="en">Thermistor sub 2</label>
+            <description lang="en">0.125'C/bit</description>
             <INT />
             <q1:defaultValue value="0x1FF" />
+            <q1:allowedValues>
+              <q1:range>
+                <minValue value="-40" />
+                <maxValue value="125" />
+              </q1:range>
+            </q1:allowedValues>
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_300B">
             <label lang="en">Cumulative Total Discharge kWh</label>
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_300B" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300B00">
+            <label lang="en">Highest sub-index supported</label>
+            <USINT />
+            <q1:defaultValue value="0x01" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300B01">
+            <description lang="en">1kwh/bit</description>
             <UDINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_300C">
             <label lang="en">Energy remaining for Battery Warranty (kWh)</label>
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_300C" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300C00">
+            <label lang="en">Highest sub-index supported</label>
+            <USINT />
+            <q1:defaultValue value="0x01" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300C01">
+            <description lang="en">0.125kwh/bit</description>
             <UDINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_300D">
             <label lang="en">Cumulative Total Battery Regen kWh</label>
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_300D" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300D00">
+            <label lang="en">Highest sub-index supported</label>
+            <USINT />
+            <q1:defaultValue value="0x01" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_300D01">
+            <description lang="en">1kWh/bit</description>
             <UDINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_300E">
-            <label lang="en">GPS Derate</label>
-            <q1:dataTypeIDRef uniqueIDRef="UID_ARR_300E" />
+            <label lang="en">GPS/Derate</label>
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_300E" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300E00">
             <label lang="en">Highest sub-index supported</label>
@@ -2874,27 +3113,27 @@ value has the following interpretation:</description>
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300E02">
             <label lang="en">GPS CAN Protocol Specification Rev</label>
-            <UDINT />
+            <USINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300E03">
             <label lang="en">High Temperature Derate Start (°C/°F) – Discharge</label>
-            <UDINT />
+            <UINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300E04">
             <label lang="en">Low Temperature Derate Start (°C/°F) – Discharge</label>
-            <UDINT />
+            <INT />
             <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300E05">
             <label lang="en">Lift Lockout Start (CSOC%)</label>
-            <UDINT />
+            <UINT />
             <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_300F">
-            <label lang="en">Charger</label>
-            <q1:dataTypeIDRef uniqueIDRef="UID_ARR_300F" />
+            <label lang="en">Charger Stats</label>
+            <q1:dataTypeIDRef uniqueIDRef="UID_REC_300F" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_300F00">
             <label lang="en">Highest sub-index supported</label>
@@ -3048,7 +3287,7 @@ value has the following interpretation:</description>
         <ProfileTechnology>CANopen</ProfileTechnology>
       </ISO15745Reference>
     </ProfileHeader>
-    <ProfileBody xmlns:q2="http://www.canopen.org/xml/1.1" xsi:type="q2:ProfileBody_CommunicationNetwork_CANopen" formatName="CANopen" formatVersion="1.0" fileName="DS301_profile.xpd" fileCreator="RBM" fileCreationDate="2023-10-01" fileCreationTime="13:00:00.0000000+02:00" fileModificationDate="2024-07-04" fileModificationTime="20:16:12.5973816+02:00" fileVersion="3" supportedLanguages="en" xmlns="">
+    <ProfileBody xmlns:q2="http://www.canopen.org/xml/1.1" xsi:type="q2:ProfileBody_CommunicationNetwork_CANopen" formatName="CANopen" formatVersion="1.0" fileName="DS301_profile.xpd" fileCreator="RBM" fileCreationDate="2023-10-01" fileCreationTime="13:00:00.0000000+02:00" fileModificationDate="2024-08-29" fileModificationTime="23:19:03.3312605+02:00" fileVersion="6" supportedLanguages="en" xmlns="">
       <ApplicationLayers>
         <q2:CANopenObjectList>
           <CANopenObject index="1000" name="Device type" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_1000" />
@@ -3514,10 +3753,20 @@ value has the following interpretation:</description>
             <CANopenSubObject subIndex="01" name="Counter" objectType="7" PDOmapping="RPDO" uniqueIDRef="UID_SUB_210001" />
             <CANopenSubObject subIndex="02" name="Reserved" objectType="7" PDOmapping="RPDO" uniqueIDRef="UID_SUB_210002" />
           </CANopenObject>
-          <CANopenObject index="280C" name="Total Number of Battery Cycles" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_280C" />
-          <CANopenObject index="280D" name="SW Asm Version" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_280D" />
-          <CANopenObject index="3000" name="Battery Efficiency, Charge In vs. Discharge out" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_3000" />
-          <CANopenObject index="3001" name="Nominal SOH" objectType="8" uniqueIDRef="UID_OBJ_3001" subNumber="5">
+          <CANopenObject index="280C" name="Total Number of Battery Cycles" objectType="9" uniqueIDRef="UID_OBJ_280C" subNumber="2">
+            <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_280C00" />
+            <CANopenSubObject subIndex="01" name="Total Number of Battery Cycles" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_280C01" />
+          </CANopenObject>
+          <CANopenObject index="280D" name="SW Asm Version" objectType="9" uniqueIDRef="UID_OBJ_280D" subNumber="3">
+            <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_280D00" />
+            <CANopenSubObject subIndex="01" name="SWAV1" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_280D01" />
+            <CANopenSubObject subIndex="02" name="SW Asm Version" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_280D02" />
+          </CANopenObject>
+          <CANopenObject index="3000" name="Battery Efficiency, Charge In vs. Discharge out" objectType="9" uniqueIDRef="UID_OBJ_3000" subNumber="2">
+            <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300000" />
+            <CANopenSubObject subIndex="01" name="Battery Efficiency, Charge In vs. Discharge out" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300001" />
+          </CANopenObject>
+          <CANopenObject index="3001" name="Nominal SOH" objectType="9" uniqueIDRef="UID_OBJ_3001" subNumber="5">
             <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300100" />
             <CANopenSubObject subIndex="01" name="Nominal Battery Energy (kWh)" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300101" />
             <CANopenSubObject subIndex="02" name="Nominal Battery Voltage (V)" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300102" />
@@ -3532,7 +3781,10 @@ value has the following interpretation:</description>
             <CANopenSubObject subIndex="04" name="Lifetime Average Charge Rate" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300204" />
             <CANopenSubObject subIndex="05" name="Lifetime Average Discharge Rate" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300205" />
           </CANopenObject>
-          <CANopenObject index="3004" name="Remaining hours left for warranty" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_3004" />
+          <CANopenObject index="3004" name="Remaining hours left for warranty" objectType="9" uniqueIDRef="UID_OBJ_3004" subNumber="2">
+            <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300400" />
+            <CANopenSubObject subIndex="01" name="Remaining hours left for warranty" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300401" />
+          </CANopenObject>
           <CANopenObject index="3005" name="BMS Data" objectType="9" uniqueIDRef="UID_OBJ_3005" subNumber="12">
             <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300500" />
             <CANopenSubObject subIndex="01" name="BMS Internal Temperature" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300501" />
@@ -3570,8 +3822,14 @@ value has the following interpretation:</description>
             <CANopenSubObject subIndex="01" name="Total Number of Charge Events" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300701" />
             <CANopenSubObject subIndex="02" name="Timestamp 4th highest priority previously active error" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300702" />
           </CANopenObject>
-          <CANopenObject index="3008" name="Total time receiving current in Charge mode" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_3008" />
-          <CANopenObject index="3009" name="Total time in Charge Mode" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_3009" />
+          <CANopenObject index="3008" name="Total time receiving current in Charge mode" objectType="9" uniqueIDRef="UID_OBJ_3008" subNumber="2">
+            <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300800" />
+            <CANopenSubObject subIndex="01" name="Total time receiving current in Charge mode" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300801" />
+          </CANopenObject>
+          <CANopenObject index="3009" name="Total time in Charge Mode" objectType="9" uniqueIDRef="UID_OBJ_3009" subNumber="2">
+            <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300900" />
+            <CANopenSubObject subIndex="01" name="Total time in Charge Mode" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300901" />
+          </CANopenObject>
           <CANopenObject index="300A" name="Thermistors" objectType="8" uniqueIDRef="UID_OBJ_300A" subNumber="5">
             <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300A00" />
             <CANopenSubObject subIndex="01" name="Thermistor 1" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300A01" />
@@ -3579,10 +3837,19 @@ value has the following interpretation:</description>
             <CANopenSubObject subIndex="03" name="Thermistor sub 1" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300A03" />
             <CANopenSubObject subIndex="04" name="Thermistor sub 2" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300A04" />
           </CANopenObject>
-          <CANopenObject index="300B" name="Cumulative Total Discharge kWh" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_300B" />
-          <CANopenObject index="300C" name="Energy remaining for Battery Warranty (kWh)" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_300C" />
-          <CANopenObject index="300D" name="Cumulative Total Battery Regen kWh" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_300D" />
-          <CANopenObject index="300E" name="GPS Derate" objectType="8" uniqueIDRef="UID_OBJ_300E" subNumber="6">
+          <CANopenObject index="300B" name="Cumulative Total Discharge kWh" objectType="9" uniqueIDRef="UID_OBJ_300B" subNumber="2">
+            <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300B00" />
+            <CANopenSubObject subIndex="01" name="Cumulative Total Discharge kWh" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300B01" />
+          </CANopenObject>
+          <CANopenObject index="300C" name="Energy remaining for Battery Warranty (kWh)" objectType="9" uniqueIDRef="UID_OBJ_300C" subNumber="2">
+            <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300C00" />
+            <CANopenSubObject subIndex="01" name="Energy remaining for Battery Warranty (kWh)" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300C01" />
+          </CANopenObject>
+          <CANopenObject index="300D" name="Cumulative Total Battery Regen kWh" objectType="9" uniqueIDRef="UID_OBJ_300D" subNumber="2">
+            <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300D00" />
+            <CANopenSubObject subIndex="01" name="Cumulative Total Battery Regen kWh" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300D01" />
+          </CANopenObject>
+          <CANopenObject index="300E" name="GPS/Derate" objectType="9" uniqueIDRef="UID_OBJ_300E" subNumber="6">
             <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300E00" />
             <CANopenSubObject subIndex="01" name="GPS Location" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300E01" />
             <CANopenSubObject subIndex="02" name="GPS CAN Protocol Specification Rev" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300E02" />
@@ -3590,7 +3857,7 @@ value has the following interpretation:</description>
             <CANopenSubObject subIndex="04" name="Low Temperature Derate Start (°C/°F) – Discharge" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300E04" />
             <CANopenSubObject subIndex="05" name="Lift Lockout Start (CSOC%)" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300E05" />
           </CANopenObject>
-          <CANopenObject index="300F" name="Charger" objectType="8" uniqueIDRef="UID_OBJ_300F" subNumber="7">
+          <CANopenObject index="300F" name="Charger Stats" objectType="9" uniqueIDRef="UID_OBJ_300F" subNumber="7">
             <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300F00" />
             <CANopenSubObject subIndex="01" name="Total Number of Charger Faults" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300F01" />
             <CANopenSubObject subIndex="02" name="Number of Charges Completed without cell Balancing" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_300F02" />

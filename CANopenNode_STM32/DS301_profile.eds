@@ -1,6 +1,6 @@
 [FileInfo]
 FileName=DS301_profile.eds
-FileVersion=3
+FileVersion=6
 FileRevision=1
 LastEDS=
 EDSVersion=4.0
@@ -8,8 +8,8 @@ Description=HYG Int
 CreationTime=1:00PM
 CreationDate=10-01-2023
 CreatedBy=RBM
-ModificationTime=8:15PM
-ModificationDate=07-04-2024
+ModificationTime=11:18PM
+ModificationDate=08-29-2024
 ModifiedBy=RBM
 
 [DeviceInfo]
@@ -3782,6 +3782,21 @@ PDOMapping=1
 
 [280C]
 ParameterName=Total Number of Battery Cycles
+ObjectType=0x9
+;StorageLocation=RAM
+SubNumber=0x2
+
+[280Csub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x01
+PDOMapping=0
+
+[280Csub1]
+ParameterName=Total Number of Battery Cycles
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0006
@@ -3790,6 +3805,30 @@ DefaultValue=0
 PDOMapping=0
 
 [280D]
+ParameterName=SW Asm Version
+ObjectType=0x9
+;StorageLocation=RAM
+SubNumber=0x3
+
+[280Dsub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x02
+PDOMapping=0
+
+[280Dsub1]
+ParameterName=SWAV1
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[280Dsub2]
 ParameterName=SW Asm Version
 ObjectType=0x7
 ;StorageLocation=RAM
@@ -3800,16 +3839,33 @@ PDOMapping=0
 
 [3000]
 ParameterName=Battery Efficiency, Charge In vs. Discharge out
+ObjectType=0x9
+;StorageLocation=RAM
+SubNumber=0x2
+
+[3000sub0]
+ParameterName=Highest sub-index supported
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0005
 AccessType=ro
+DefaultValue=0x01
+PDOMapping=0
+
+[3000sub1]
+ParameterName=Battery Efficiency, Charge In vs. Discharge out
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+HighLimit=100
+LowLimit=0
 DefaultValue=0
 PDOMapping=0
 
 [3001]
 ParameterName=Nominal SOH
-ObjectType=0x8
+ObjectType=0x9
 ;StorageLocation=RAM
 SubNumber=0x5
 
@@ -3826,7 +3882,7 @@ PDOMapping=0
 ParameterName=Nominal Battery Energy (kWh)
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0006
+DataType=0x0007
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
@@ -3920,10 +3976,25 @@ PDOMapping=0
 
 [3004]
 ParameterName=Remaining hours left for warranty
+ObjectType=0x9
+;StorageLocation=RAM
+SubNumber=0x2
+
+[3004sub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x01
+PDOMapping=0
+
+[3004sub1]
+ParameterName=Remaining hours left for warranty
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
-AccessType=rw
+AccessType=ro
 DefaultValue=0
 PDOMapping=0
 
@@ -4226,6 +4297,21 @@ PDOMapping=0
 
 [3008]
 ParameterName=Total time receiving current in Charge mode
+ObjectType=0x9
+;StorageLocation=RAM
+SubNumber=0x2
+
+[3008sub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x01
+PDOMapping=0
+
+[3008sub1]
+ParameterName=Total time receiving current in Charge mode
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
@@ -4234,6 +4320,21 @@ DefaultValue=0
 PDOMapping=0
 
 [3009]
+ParameterName=Total time in Charge Mode
+ObjectType=0x9
+;StorageLocation=RAM
+SubNumber=0x2
+
+[3009sub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x01
+PDOMapping=0
+
+[3009sub1]
 ParameterName=Total time in Charge Mode
 ObjectType=0x7
 ;StorageLocation=RAM
@@ -4263,6 +4364,8 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0003
 AccessType=ro
+HighLimit=125
+LowLimit=-40
 DefaultValue=0x1FF
 PDOMapping=0
 
@@ -4272,6 +4375,8 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0003
 AccessType=ro
+HighLimit=125
+LowLimit=-40
 DefaultValue=0x1FF
 PDOMapping=0
 
@@ -4281,6 +4386,8 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0003
 AccessType=ro
+HighLimit=125
+LowLimit=-40
 DefaultValue=0x1FF
 PDOMapping=0
 
@@ -4290,10 +4397,27 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0003
 AccessType=ro
+HighLimit=125
+LowLimit=-40
 DefaultValue=0x1FF
 PDOMapping=0
 
 [300B]
+ParameterName=Cumulative Total Discharge kWh
+ObjectType=0x9
+;StorageLocation=RAM
+SubNumber=0x2
+
+[300Bsub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x01
+PDOMapping=0
+
+[300Bsub1]
 ParameterName=Cumulative Total Discharge kWh
 ObjectType=0x7
 ;StorageLocation=RAM
@@ -4304,6 +4428,21 @@ PDOMapping=0
 
 [300C]
 ParameterName=Energy remaining for Battery Warranty (kWh)
+ObjectType=0x9
+;StorageLocation=RAM
+SubNumber=0x2
+
+[300Csub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x01
+PDOMapping=0
+
+[300Csub1]
+ParameterName=Energy remaining for Battery Warranty (kWh)
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
@@ -4313,6 +4452,21 @@ PDOMapping=0
 
 [300D]
 ParameterName=Cumulative Total Battery Regen kWh
+ObjectType=0x9
+;StorageLocation=RAM
+SubNumber=0x2
+
+[300Dsub0]
+ParameterName=Highest sub-index supported
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0005
+AccessType=ro
+DefaultValue=0x01
+PDOMapping=0
+
+[300Dsub1]
+ParameterName=Cumulative Total Battery Regen kWh
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
@@ -4321,8 +4475,8 @@ DefaultValue=0
 PDOMapping=0
 
 [300E]
-ParameterName=GPS Derate
-ObjectType=0x8
+ParameterName=GPS/Derate
+ObjectType=0x9
 ;StorageLocation=RAM
 SubNumber=0x6
 
@@ -4348,7 +4502,7 @@ PDOMapping=0
 ParameterName=GPS CAN Protocol Specification Rev
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0005
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
@@ -4357,7 +4511,7 @@ PDOMapping=0
 ParameterName=High Temperature Derate Start (°C/°F) – Discharge
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0006
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
@@ -4366,7 +4520,7 @@ PDOMapping=0
 ParameterName=Low Temperature Derate Start (°C/°F) – Discharge
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0003
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
@@ -4375,14 +4529,14 @@ PDOMapping=0
 ParameterName=Lift Lockout Start (CSOC%)
 ObjectType=0x7
 ;StorageLocation=RAM
-DataType=0x0007
+DataType=0x0006
 AccessType=ro
 DefaultValue=0
 PDOMapping=0
 
 [300F]
-ParameterName=Charger
-ObjectType=0x8
+ParameterName=Charger Stats
+ObjectType=0x9
 ;StorageLocation=RAM
 SubNumber=0x7
 
