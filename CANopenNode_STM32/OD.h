@@ -12,11 +12,11 @@
     File info:
         File Names:   OD.h; OD.c
         Project File: DS301_profile.xpd
-        File Version: 3
+        File Version: 6
 
         Created:      2023/10/01 13:00:00
         Created By:   RBM
-        Modified:     2024/07/04 20:15:42
+        Modified:     2024/08/29 23:18:41
         Modified By:  RBM
 
     Device Info:
@@ -58,10 +58,7 @@
 #define OD_CNT_ARR_1029 2
 #define OD_CNT_ARR_1F81 127
 #define OD_CNT_ARR_1F82 127
-#define OD_CNT_ARR_3001 4
 #define OD_CNT_ARR_300A 4
-#define OD_CNT_ARR_300E 5
-#define OD_CNT_ARR_300F 6
 #define OD_CNT_ARR_6030 5
 #define OD_CNT_ARR_6031 8
 
@@ -163,11 +160,26 @@ typedef struct {
         uint8_t counter;
         uint8_t reserved;
     } x2100_mainTruckControllerCrossCheck;
-    uint16_t x280C_totalNumberOfBatteryCycles;
-    uint32_t x280D_SW_AsmVersion;
-    uint8_t x3000_batteryEfficiencyChargeInVsDischargeOut;
-    uint8_t x3001_nominalSOH_sub0;
-    uint16_t x3001_nominalSOH[OD_CNT_ARR_3001];
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint16_t totalNumberOfBatteryCycles;
+    } x280C_totalNumberOfBatteryCycles;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t SWAV1;
+        uint32_t SW_AsmVersion;
+    } x280D_SW_AsmVersion;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint8_t batteryEfficiencyChargeInVsDischargeOut;
+    } x3000_batteryEfficiencyChargeInVsDischargeOut;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t nominalBatteryEnergyKWh;
+        uint16_t nominalBatteryVoltageV;
+        uint16_t SOH_WarrantyValuePercentOfBeginningLifeOfCapacityAh;
+        uint16_t SOH_RunningValuePercentOfBeginningLifeOfCapacityAh;
+    } x3001_nominalSOH;
     struct {
         uint8_t highestSub_indexSupported;
         uint16_t remainingBatteryCyclesLeftForWarranty;
@@ -176,7 +188,10 @@ typedef struct {
         uint16_t lifetimeAverageChargeRate;
         uint16_t lifetimeAverageDischargeRate;
     } x3002_lifetimeAvg;
-    uint32_t x3004_remainingHoursLeftForWarranty;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t remainingHoursLeftForWarranty;
+    } x3004_remainingHoursLeftForWarranty;
     struct {
         uint8_t highestSub_indexSupported;
         int16_t BMS_InternalTemperature;
@@ -214,17 +229,45 @@ typedef struct {
         uint32_t totalNumberOfChargeEvents;
         uint32_t timestamp4thHighestPriorityPreviouslyActiveError;
     } x3007_totalNumberOfChargeEvents;
-    uint32_t x3008_totalTimeReceivingCurrentInChargeMode;
-    uint32_t x3009_totalTimeInChargeMode;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t totalTimeReceivingCurrentInChargeMode;
+    } x3008_totalTimeReceivingCurrentInChargeMode;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t totalTimeInChargeMode;
+    } x3009_totalTimeInChargeMode;
     uint8_t x300A_thermistors_sub0;
     int16_t x300A_thermistors[OD_CNT_ARR_300A];
-    uint32_t x300B_cumulativeTotalDischargeKWh;
-    uint32_t x300C_energyRemainingForBatteryWarrantyKWh;
-    uint32_t x300D_cumulativeTotalBatteryRegenKWh;
-    uint8_t x300E_GPS_Derate_sub0;
-    uint32_t x300E_GPS_Derate[OD_CNT_ARR_300E];
-    uint8_t x300F_charger_sub0;
-    uint32_t x300F_charger[OD_CNT_ARR_300F];
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t cumulativeTotalDischargeKWh;
+    } x300B_cumulativeTotalDischargeKWh;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t energyRemainingForBatteryWarrantyKWh;
+    } x300C_energyRemainingForBatteryWarrantyKWh;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t cumulativeTotalBatteryRegenKWh;
+    } x300D_cumulativeTotalBatteryRegenKWh;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t GPS_Location;
+        uint8_t GPS_CAN_ProtocolSpecificationRev;
+        uint16_t highTemperatureDerateStartC_F_Discharge;
+        int16_t lowTemperatureDerateStartC_F_Discharge;
+        uint16_t liftLockoutStartCSOC;
+    } x300E_GPS_Derate;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t totalNumberOfChargerFaults;
+        uint32_t numberOfChargesCompletedWithoutCellBalancing;
+        uint32_t timestampOfLastChargeCompletedWithoutCellBalancing;
+        uint32_t numberOfChargesCompletedWithCellBalancing;
+        uint32_t timestampOfLastChargeCompletedWithCellBalancing;
+        uint32_t warrantableBatteryEnergyKWh;
+    } x300F_chargerStats;
     uint8_t x6030_batterySN_sub0;
     uint32_t x6030_batterySN[OD_CNT_ARR_6030];
     uint8_t x6031_modelID_sub0;
@@ -403,7 +446,7 @@ extern OD_ATTR_OD OD_t *OD;
 #define OD_ENTRY_H300C_energyRemainingForBatteryWarrantyKWh &OD->list[54]
 #define OD_ENTRY_H300D_cumulativeTotalBatteryRegenKWh &OD->list[55]
 #define OD_ENTRY_H300E_GPS_Derate &OD->list[56]
-#define OD_ENTRY_H300F_charger &OD->list[57]
+#define OD_ENTRY_H300F_chargerStats &OD->list[57]
 #define OD_ENTRY_H6030_batterySN &OD->list[58]
 #define OD_ENTRY_H6031_modelID &OD->list[59]
 #define OD_ENTRY_H6050_cumulativeTotalBatteryChargeKWh &OD->list[60]
