@@ -63,12 +63,12 @@ canopen_app_init(CANopenNodeSTM32* _canopenNodeSTM32) {
     canopenNodeSTM32 = _canopenNodeSTM32;
 
 #if (CO_CONFIG_STORAGE) & CO_CONFIG_STORAGE_ENABLE
-    CO_storage_t storage;
-    CO_storage_entry_t storageEntries[] = {{.addr = &OD_PERSIST_COMM,
-                                            .len = sizeof(OD_PERSIST_COMM),
-                                            .subIndexOD = 2,
-                                            .attr = CO_storage_cmd | CO_storage_restore,
-                                            .addrNV = NULL}};
+    static CO_storage_t storage;
+    static CO_storage_entry_t storageEntries[] = {{.addr = &OD_PERSIST_COMM,
+                                                   .len = sizeof(OD_PERSIST_COMM),
+                                                   .subIndexOD = 2,
+                                                   .attr = CO_storage_cmd | CO_storage_restore,
+                                                   .addrNV = NULL}};
     uint8_t storageEntriesCount = sizeof(storageEntries) / sizeof(storageEntries[0]);
     uint32_t storageInitError = 0;
 #endif
@@ -215,10 +215,11 @@ canopen_app_process() {
 
         if (reset_status == CO_RESET_COMM) {
             /* delete objects from memory */
+        	HAL_TIM_Base_Stop_IT(canopenNodeSTM32->timerHandle);
             CO_CANsetConfigurationMode((void*)canopenNodeSTM32);
             CO_delete(CO);
             log_printf("CANopenNode Reset Communication request\n");
-            canopen_app_resetCommunication(); // Reset Communication routine
+            canopen_app_init(canopenNodeSTM32); // Reset Communication routine
         } else if (reset_status == CO_RESET_APP) {
             log_printf("CANopenNode Device Reset\n");
             HAL_NVIC_SystemReset(); // Reset the STM32 Microcontroller
