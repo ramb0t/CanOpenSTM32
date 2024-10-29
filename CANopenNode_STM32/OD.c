@@ -49,13 +49,13 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     },
     .x1400_RPDOCommunicationParameter = {
         .highestSub_indexSupported = 0x05,
-        .COB_IDUsedByRPDO = 0x0000022C,
+        .COB_IDUsedByRPDO = 0x00000200,
         .transmissionType = 0x00,
         .eventTimer = 0x03E8
     },
     .x1401_RPDOCommunicationParameter = {
         .highestSub_indexSupported = 0x05,
-        .COB_IDUsedByRPDO = 0x0000022C,
+        .COB_IDUsedByRPDO = 0x00000300,
         .transmissionType = 0x00,
         .eventTimer = 0x03E8
     },
@@ -99,7 +99,7 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     },
     .x1802_TPDOCommunicationParameter = {
         .highestSub_indexSupported = 0x06,
-        .COB_IDUsedByTPDO = 0xC00003AC,
+        .COB_IDUsedByTPDO = 0xC0000380,
         .transmissionType = 0x01,
         .inhibitTime = 0x0000,
         .eventTimer = 0x0000,
@@ -107,7 +107,7 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     },
     .x1803_TPDOCommunicationParameter = {
         .highestSub_indexSupported = 0x06,
-        .COB_IDUsedByTPDO = 0xC00004AC,
+        .COB_IDUsedByTPDO = 0xC0000480,
         .transmissionType = 0x01,
         .inhibitTime = 0x0000,
         .eventTimer = 0x0000,
