@@ -14,9 +14,9 @@
         Project File: DS301_profile.xpd
         File Version: 2
 
-        Created:      2023/10/01 13:00:00
+        Created:      01/10/2023 13:00:00
         Created By:   RBM
-        Modified:     2024/10/29 23:55:08
+        Modified:     06/11/2024 13:34:41
         Modified By:  RBM
 
     Device Info:
@@ -214,8 +214,13 @@ typedef struct {
     uint8_t x1F82_requestNMT_sub0;
     struct {
         uint8_t highestSub_indexSupported;
+        uint32_t uset;
+        uint32_t iset;
+        uint32_t pset;
         uint8_t reserved1;
         uint8_t reserved2;
+        uint8_t state;
+        uint8_t soC;
     } x2011_setReferenceValues;
     struct {
         uint8_t highestSub_indexSupported;

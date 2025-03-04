@@ -171,8 +171,13 @@ OD_ATTR_RAM OD_RAM_t OD_RAM = {
     .x1F82_requestNMT_sub0 = 0x7F,
     .x2011_setReferenceValues = {
         .highestSub_indexSupported = 0x07,
+        .uset = 0x00000000,
+        .iset = 0x00000000,
+        .pset = 0x00000000,
         .reserved1 = 0x00,
-        .reserved2 = 0x00
+        .reserved2 = 0x00,
+        .state = 0x00,
+        .soC = 0x00
     },
     .x2012_measurments = {
         .highestSub_indexSupported = 0x07
@@ -997,19 +1002,19 @@ static CO_PROGMEM ODObjs_t ODObjs = {
             .dataLength = 1
         },
         {
-            .dataOrig = NULL,
+            .dataOrig = &OD_RAM.x2011_setReferenceValues.uset,
             .subIndex = 1,
             .attribute = ODA_SDO_RW | ODA_TPDO | ODA_MB,
             .dataLength = 4
         },
         {
-            .dataOrig = NULL,
+            .dataOrig = &OD_RAM.x2011_setReferenceValues.iset,
             .subIndex = 2,
             .attribute = ODA_SDO_RW | ODA_TPDO | ODA_MB,
             .dataLength = 4
         },
         {
-            .dataOrig = NULL,
+            .dataOrig = &OD_RAM.x2011_setReferenceValues.pset,
             .subIndex = 3,
             .attribute = ODA_SDO_RW | ODA_TPDO | ODA_MB,
             .dataLength = 4
@@ -1027,13 +1032,13 @@ static CO_PROGMEM ODObjs_t ODObjs = {
             .dataLength = 1
         },
         {
-            .dataOrig = NULL,
+            .dataOrig = &OD_RAM.x2011_setReferenceValues.state,
             .subIndex = 6,
             .attribute = ODA_SDO_RW | ODA_TPDO,
             .dataLength = 1
         },
         {
-            .dataOrig = NULL,
+            .dataOrig = &OD_RAM.x2011_setReferenceValues.soC,
             .subIndex = 7,
             .attribute = ODA_SDO_RW | ODA_TPDO,
             .dataLength = 1

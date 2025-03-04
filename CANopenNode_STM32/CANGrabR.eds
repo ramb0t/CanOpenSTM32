@@ -8,8 +8,8 @@ Description=MP Int
 CreationTime=1:00PM
 CreationDate=10-01-2023
 CreatedBy=RBM
-ModificationTime=11:55PM
-ModificationDate=10-29-2024
+ModificationTime=1:34PM
+ModificationDate=11-06-2024
 ModifiedBy=RBM
 
 [DeviceInfo]
@@ -3883,7 +3883,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rwr
-DefaultValue=
+DefaultValue=0
 PDOMapping=1
 
 [2011sub2]
@@ -3892,7 +3892,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rwr
-DefaultValue=
+DefaultValue=0
 PDOMapping=1
 
 [2011sub3]
@@ -3901,7 +3901,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rwr
-DefaultValue=
+DefaultValue=0
 PDOMapping=1
 
 [2011sub4]
@@ -3928,7 +3928,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0005
 AccessType=rwr
-DefaultValue=
+DefaultValue=0
 PDOMapping=1
 
 [2011sub7]
@@ -3939,7 +3939,7 @@ DataType=0x0005
 AccessType=rwr
 HighLimit=100
 LowLimit=0
-DefaultValue=
+DefaultValue=0
 PDOMapping=1
 
 [2012]
