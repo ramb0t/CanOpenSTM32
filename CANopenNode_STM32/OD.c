@@ -27,15 +27,15 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     .x1007_synchronousWindowLength = 0x00000000,
     .x1012_COB_IDTimeStampObject = 0x00000100,
     .x1014_COB_ID_EMCY = 0x00000080,
-    .x1015_inhibitTimeEMCY = 0x0000,
+    .x1015_inhibitTimeEMCY = 0x0064,
     .x1016_consumerHeartbeatTime_sub0 = 0x08,
     .x1016_consumerHeartbeatTime = {0x00710FA0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
-    .x1017_producerHeartbeatTime = 0x0000,
+    .x1017_producerHeartbeatTime = 0x03E8,
     .x1018_identity = {
         .highestSub_indexSupported = 0x04,
-        .vendor_ID = 0x00000000,
-        .productCode = 0x00000000,
-        .revisionNumber = 0x00000000,
+        .vendor_ID = 0x004D5300,
+        .productCode = 0x00010004,
+        .revisionNumber = 0x01010000,
         .serialNumber = 0x00000000
     },
     .x1019_synchronousCounterOverflowValue = 0x00,
@@ -49,7 +49,7 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     },
     .x1400_RPDOCommunicationParameter = {
         .highestSub_indexSupported = 0x05,
-        .COB_IDUsedByRPDO = 0x0000025F,
+        .COB_IDUsedByRPDO = 0x00000200,
         .transmissionType = 0xFE,
         .eventTimer = 0x0000
     },
@@ -66,7 +66,7 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
     },
     .x1801_TPDOCommunicationParameter = {
         .highestSub_indexSupported = 0x06,
-        .COB_IDUsedByTPDO = 0x000002DF,
+        .COB_IDUsedByTPDO = 0x00000280,
         .transmissionType = 0xFE,
         .inhibitTime = 0x0000,
         .eventTimer = 0x00C8,
@@ -181,7 +181,7 @@ OD_ATTR_RAM OD_RAM_t OD_RAM = {
     .x3007_totalNumberOfChargeEvents = {
         .highestSub_indexSupported = 0x02,
         .totalNumberOfChargeEvents = 0x00000000,
-        .timestamp4thHighestPriorityPreviouslyActiveError = 0x00000000
+        .timestampOfLastChargeEvent = 0x00000000
     },
     .x3008_totalTimeReceivingCurrentInChargeMode = {
         .highestSub_indexSupported = 0x01,
@@ -233,7 +233,7 @@ OD_ATTR_RAM OD_RAM_t OD_RAM = {
 OD_ATTR_ROM OD_ROM_t OD_ROM = {
     .x1800_TPDOCommunicationParameter = {
         .highestSub_indexSupported = 0x06,
-        .COB_IDUsedByTPDO = 0x000001DF,
+        .COB_IDUsedByTPDO = 0x00000180,
         .transmissionType = 0xFE,
         .inhibitTime = 0x0000,
         .eventTimer = 0x00C8,
@@ -857,13 +857,13 @@ static CO_PROGMEM ODObjs_t ODObjs = {
         {
             .dataOrig = &OD_RAM.x2100_mainTruckControllerCrossCheck.counter,
             .subIndex = 1,
-            .attribute = ODA_RPDO,
+            .attribute = ODA_SDO_W | ODA_RPDO,
             .dataLength = 1
         },
         {
             .dataOrig = &OD_RAM.x2100_mainTruckControllerCrossCheck.reserved,
             .subIndex = 2,
-            .attribute = ODA_RPDO,
+            .attribute = ODA_SDO_W | ODA_RPDO,
             .dataLength = 1
         }
     },
@@ -1185,7 +1185,7 @@ static CO_PROGMEM ODObjs_t ODObjs = {
             .dataLength = 4
         },
         {
-            .dataOrig = &OD_RAM.x3007_totalNumberOfChargeEvents.timestamp4thHighestPriorityPreviouslyActiveError,
+            .dataOrig = &OD_RAM.x3007_totalNumberOfChargeEvents.timestampOfLastChargeEvent,
             .subIndex = 2,
             .attribute = ODA_SDO_R | ODA_MB,
             .dataLength = 4

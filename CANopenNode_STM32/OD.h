@@ -11,19 +11,19 @@
 
     File info:
         File Names:   OD.h; OD.c
-        Project File: DS301_profile.xpd
-        File Version: 1
+        Project File: CO_FLI_COMBI_profile.xpd
+        File Version: 3
 
-        Created:      10/1/2023 4:00:00 AM
+        Created:      10/1/2023 1:00:00 PM
         Created By:   RBM
-        Modified:     7/30/2025 3:37:08 PM
+        Modified:     9/21/2025 2:53:01 PM
         Modified By:  RBM
 
     Device Info:
         Vendor Name:  Maxwell Spark
-        Vendor ID:    
+        Vendor ID:    0x004D5300
         Product Name: CANGrabR Open
-        Product ID:   
+        Product ID:   0x00010004
 
         Description:  CombiLift
 *******************************************************************************/
@@ -227,7 +227,7 @@ typedef struct {
     struct {
         uint8_t highestSub_indexSupported;
         uint32_t totalNumberOfChargeEvents;
-        uint32_t timestamp4thHighestPriorityPreviouslyActiveError;
+        uint32_t timestampOfLastChargeEvent;
     } x3007_totalNumberOfChargeEvents;
     struct {
         uint8_t highestSub_indexSupported;
