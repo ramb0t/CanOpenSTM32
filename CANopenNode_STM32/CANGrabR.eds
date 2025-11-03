@@ -1,6 +1,6 @@
 [FileInfo]
 FileName=CANGrabR.eds
-FileVersion=4
+FileVersion=5
 FileRevision=1
 LastEDS=
 EDSVersion=4.0
@@ -584,7 +584,7 @@ ObjectType=0x7
 ;StorageLocation=PERSIST_COMM
 DataType=0x0006
 AccessType=rw
-DefaultValue=1000
+DefaultValue=0
 PDOMapping=0
 
 [1019]
