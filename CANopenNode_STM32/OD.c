@@ -69,7 +69,7 @@ OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM = {
         .COB_IDUsedByTPDO = 0x00000280,
         .transmissionType = 0xFE,
         .inhibitTime = 0x0000,
-        .eventTimer = 0x00C8,
+        .eventTimer = 0x0064,
         .SYNCStartValue = 0x00
     },
     .x1A01_TPDOMappingParameter = {
@@ -236,7 +236,7 @@ OD_ATTR_ROM OD_ROM_t OD_ROM = {
         .COB_IDUsedByTPDO = 0x00000180,
         .transmissionType = 0xFE,
         .inhibitTime = 0x0000,
-        .eventTimer = 0x00C8,
+        .eventTimer = 0x0064,
         .SYNCStartValue = 0x00
     },
     .x1A00_TPDOMappingParameter = {
