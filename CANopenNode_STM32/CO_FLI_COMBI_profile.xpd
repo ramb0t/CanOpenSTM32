@@ -15,7 +15,7 @@
         <ProfileTechnology>CANopen</ProfileTechnology>
       </ISO15745Reference>
     </ProfileHeader>
-    <ProfileBody xmlns:q1="http://www.canopen.org/xml/1.1" xsi:type="q1:ProfileBody_Device_CANopen" formatName="CANopen" formatVersion="1.0" fileName="CO_FLI_COMBI_profile.xpd" fileCreator="RBM" fileCreationDate="2023-10-01" fileCreationTime="13:00:00.0000000+02:00" fileModifiedBy="RBM" fileModificationDate="2026-01-06" fileModificationTime="19:22:09.4998640+02:00" fileVersion="6" supportedLanguages="en" xmlns="">
+    <ProfileBody xmlns:q1="http://www.canopen.org/xml/1.1" xsi:type="q1:ProfileBody_Device_CANopen" formatName="CANopen" formatVersion="1.0" fileName="CO_FLI_COMBI_profile.xpd" fileCreator="RBM" fileCreationDate="2023-10-01" fileCreationTime="13:00:00.0000000+02:00" fileModifiedBy="RBM" fileModificationDate="2026-01-07" fileModificationTime="14:17:22.5158474+02:00" fileVersion="7" supportedLanguages="en" xmlns="">
       <q1:DeviceIdentity>
         <q1:vendorName>Maxwell Spark</q1:vendorName>
         <q1:vendorID>0x004D5300</q1:vendorID>
@@ -1380,12 +1380,12 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
           <q1:parameter uniqueID="UID_SUB_180003" access="readWrite">
             <label lang="en">Inhibit time</label>
             <UINT />
-            <q1:defaultValue value="0" />
+            <q1:defaultValue value="50" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_180005" access="readWrite">
             <label lang="en">Event timer</label>
             <UINT />
-            <q1:defaultValue value="20" />
+            <q1:defaultValue value="100" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_180006" access="readWrite">
             <label lang="en">SYNC start value</label>
@@ -1431,7 +1431,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
           <q1:parameter uniqueID="UID_SUB_180103" access="readWrite">
             <label lang="en">Inhibit time</label>
             <UINT />
-            <q1:defaultValue value="0" />
+            <q1:defaultValue value="50" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_180105" access="readWrite">
             <label lang="en">Event timer</label>
@@ -3287,7 +3287,7 @@ value has the following interpretation:</description>
         <ProfileTechnology>CANopen</ProfileTechnology>
       </ISO15745Reference>
     </ProfileHeader>
-    <ProfileBody xmlns:q2="http://www.canopen.org/xml/1.1" xsi:type="q2:ProfileBody_CommunicationNetwork_CANopen" formatName="CANopen" formatVersion="1.0" fileName="CO_FLI_COMBI_profile.xpd" fileCreator="RBM" fileCreationDate="2023-10-01" fileCreationTime="13:00:00.0000000+02:00" fileModificationDate="2026-01-06" fileModificationTime="19:22:09.4998640+02:00" fileVersion="6" supportedLanguages="en" xmlns="">
+    <ProfileBody xmlns:q2="http://www.canopen.org/xml/1.1" xsi:type="q2:ProfileBody_CommunicationNetwork_CANopen" formatName="CANopen" formatVersion="1.0" fileName="CO_FLI_COMBI_profile.xpd" fileCreator="RBM" fileCreationDate="2023-10-01" fileCreationTime="13:00:00.0000000+02:00" fileModificationDate="2026-01-07" fileModificationTime="14:17:22.5158474+02:00" fileVersion="7" supportedLanguages="en" xmlns="">
       <ApplicationLayers>
         <q2:CANopenObjectList>
           <CANopenObject index="1000" name="Device type" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_1000" />
