@@ -446,30 +446,22 @@ CO_CANmodule_process(CO_CANmodule_t* CANmodule) {
     err = ((CAN_HandleTypeDef*)((CANopenNodeSTM32*)CANmodule->CANptr)->CANHandle)->Instance->ESR
           & (CAN_ESR_BOFF | CAN_ESR_EPVF | CAN_ESR_EWGF);
 
-    //    uint32_t esrVal = ((CAN_HandleTypeDef*)((CANopenNodeSTM32*)CANmodule->CANptr)->CANHandle)->Instance->ESR; Debug purpose
     if (CANmodule->errOld != err) {
 
         uint16_t status = CANmodule->CANerrorStatus;
 
         CANmodule->errOld = err;
 
-        if (err & CAN_ESR_BOFF) {
-            status |= CO_CAN_ERRTX_BUS_OFF;
-            // In this driver, we assume that auto bus recovery is activated ! so this error will eventually handled automatically.
-
-        } else {
-            /* recalculate CANerrorStatus, first clear some flags */
+        /* Suppress Bus-Off, Warning, and Passive error propagation to the
+         * CANopen emergency handler.  With ABOM enabled the hardware recovers
+         * automatically, so reporting these transient states only generates
+         * EMCY traffic that starves the TPDO TX mailboxes. The error flags
+         * are still visible via the ESR register in the debug status print. */
+        if (!(err & CAN_ESR_BOFF)) {
+            /* Clear bus-off and passive/warning flags when not in bus-off */
             status &= 0xFFFF
                       ^ (CO_CAN_ERRTX_BUS_OFF | CO_CAN_ERRRX_WARNING | CO_CAN_ERRRX_PASSIVE | CO_CAN_ERRTX_WARNING
                          | CO_CAN_ERRTX_PASSIVE);
-
-            if (err & CAN_ESR_EWGF) {
-                status |= CO_CAN_ERRRX_WARNING | CO_CAN_ERRTX_WARNING;
-            }
-
-            if (err & CAN_ESR_EPVF) {
-                status |= CO_CAN_ERRRX_PASSIVE | CO_CAN_ERRTX_PASSIVE;
-            }
         }
 
         CANmodule->CANerrorStatus = status;
@@ -720,6 +712,25 @@ HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef* hcan) {
 
 void
 HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef* hcan) {
+    CO_CANinterrupt_TX(CANModule_local, CAN_TX_MAILBOX0);
+}
+
+/* With NART enabled, failed TX (no ACK) triggers the Abort callback, not the
+ * Complete callback.  Without these, bufferFull gets stuck true and TPDOs are
+ * dropped until the next successful transmission clears it.  Route aborts
+ * through the same handler so pending buffers get retried immediately. */
+void
+HAL_CAN_TxMailbox0AbortCallback(CAN_HandleTypeDef* hcan) {
+    CO_CANinterrupt_TX(CANModule_local, CAN_TX_MAILBOX0);
+}
+
+void
+HAL_CAN_TxMailbox1AbortCallback(CAN_HandleTypeDef* hcan) {
+    CO_CANinterrupt_TX(CANModule_local, CAN_TX_MAILBOX0);
+}
+
+void
+HAL_CAN_TxMailbox2AbortCallback(CAN_HandleTypeDef* hcan) {
     CO_CANinterrupt_TX(CANModule_local, CAN_TX_MAILBOX0);
 }
 #endif
