@@ -28,7 +28,6 @@
 #include "CANopen.h"
 #include "main.h"
 #include <stdio.h>
-#include <inttypes.h>
 
 #include "CO_storageBlank.h"
 #include "OD.h"
@@ -64,12 +63,12 @@ canopen_app_init(CANopenNodeSTM32* _canopenNodeSTM32) {
     canopenNodeSTM32 = _canopenNodeSTM32;
 
 #if (CO_CONFIG_STORAGE) & CO_CONFIG_STORAGE_ENABLE
-    static CO_storage_t storage;
-    static CO_storage_entry_t storageEntries[] = {{.addr = &OD_PERSIST_COMM,
-                                                   .len = sizeof(OD_PERSIST_COMM),
-                                                   .subIndexOD = 2,
-                                                   .attr = CO_storage_cmd | CO_storage_restore,
-                                                   .addrNV = NULL}};
+    CO_storage_t storage;
+    CO_storage_entry_t storageEntries[] = {{.addr = &OD_PERSIST_COMM,
+                                            .len = sizeof(OD_PERSIST_COMM),
+                                            .subIndexOD = 2,
+                                            .attr = CO_storage_cmd | CO_storage_restore,
+                                            .addrNV = NULL}};
     uint8_t storageEntriesCount = sizeof(storageEntries) / sizeof(storageEntries[0]);
     uint32_t storageInitError = 0;
 #endif
@@ -91,7 +90,7 @@ canopen_app_init(CANopenNodeSTM32* _canopenNodeSTM32) {
         log_printf("Error: Can't allocate memory\n");
         return 1;
     } else {
-        log_printf("Allocated %" PRIu32 " bytes for CANopen objects\n", heapMemoryUsed);
+        log_printf("Allocated %lu bytes for CANopen objects\n", (unsigned long)heapMemoryUsed);
     }
 
     canopenNodeSTM32->canOpenStack = CO;
@@ -134,7 +133,9 @@ canopen_app_resetCommunication() {
                                                 .productCode = OD_PERSIST_COMM.x1018_identity.productCode,
                                                 .revisionNumber = OD_PERSIST_COMM.x1018_identity.revisionNumber,
                                                 .serialNumber = OD_PERSIST_COMM.x1018_identity.serialNumber}};
-    err = CO_LSSinit(CO, &lssAddress, &canopenNodeSTM32->desiredNodeID, &canopenNodeSTM32->baudrate);
+    /* CO_LSSinit expects a uint16_t* for pendingBitRate; convert local value */
+    uint16_t pendingBitRate = (uint16_t)canopenNodeSTM32->baudrate;
+    err = CO_LSSinit(CO, &lssAddress, &canopenNodeSTM32->desiredNodeID, &pendingBitRate);
     if (err != CO_ERROR_NO) {
         log_printf("Error: LSS slave initialization failed: %d\n", err);
         return 2;
@@ -156,7 +157,7 @@ canopen_app_resetCommunication() {
                          canopenNodeSTM32->activeNodeID, &errInfo);
     if (err != CO_ERROR_NO && err != CO_ERROR_NODE_ID_UNCONFIGURED_LSS) {
         if (err == CO_ERROR_OD_PARAMETERS) {
-            log_printf("Error: Object Dictionary entry 0x%" PRIx32 "\n", errInfo);
+            log_printf("Error: Object Dictionary entry 0x%lX\n", (unsigned long)errInfo);
         } else {
             log_printf("Error: CANopen initialization failed: %d\n", err);
         }
@@ -164,9 +165,9 @@ canopen_app_resetCommunication() {
     }
 
     err = CO_CANopenInitPDO(CO, CO->em, OD, canopenNodeSTM32->activeNodeID, &errInfo);
-    if (err != CO_ERROR_NO && err != CO_ERROR_NODE_ID_UNCONFIGURED_LSS) {
+    if (err != CO_ERROR_NO) {
         if (err == CO_ERROR_OD_PARAMETERS) {
-            log_printf("Error: Object Dictionary entry 0x%" PRIx32 "\n", errInfo);
+            log_printf("Error: Object Dictionary entry 0x%lX\n", (unsigned long)errInfo);
         } else {
             log_printf("Error: PDO initialization failed: %d\n", err);
         }
@@ -216,11 +217,10 @@ canopen_app_process() {
 
         if (reset_status == CO_RESET_COMM) {
             /* delete objects from memory */
-        	HAL_TIM_Base_Stop_IT(canopenNodeSTM32->timerHandle);
             CO_CANsetConfigurationMode((void*)canopenNodeSTM32);
             CO_delete(CO);
             log_printf("CANopenNode Reset Communication request\n");
-            canopen_app_init(canopenNodeSTM32); // Reset Communication routine
+            canopen_app_resetCommunication(); // Reset Communication routine
         } else if (reset_status == CO_RESET_APP) {
             log_printf("CANopenNode Device Reset\n");
             HAL_NVIC_SystemReset(); // Reset the STM32 Microcontroller

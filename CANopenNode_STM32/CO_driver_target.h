@@ -58,6 +58,17 @@ extern "C" {
 /* Stack configuration override default values.
  * For more information see file CO_config.h. */
 
+/* Enable NMT master and heartbeat query utility functions in this project.
+ * This overrides default CO_config.h settings to expose prototypes used by the
+ * application (e.g. CO_NMT_sendCommand and CO_HBconsumer_getIdxByNodeId). */
+#undef CO_CONFIG_NMT
+#define CO_CONFIG_NMT (CO_CONFIG_NMT_MASTER | CO_CONFIG_GLOBAL_FLAG_CALLBACK_PRE | CO_CONFIG_GLOBAL_FLAG_TIMERNEXT)
+
+#undef CO_CONFIG_HB_CONS
+#define CO_CONFIG_HB_CONS \
+    (CO_CONFIG_HB_CONS_ENABLE | CO_CONFIG_HB_CONS_QUERY_FUNCT | CO_CONFIG_GLOBAL_FLAG_CALLBACK_PRE \
+     | CO_CONFIG_GLOBAL_FLAG_TIMERNEXT | CO_CONFIG_GLOBAL_FLAG_OD_DYNAMIC)
+
 /* Basic definitions. If big endian, CO_SWAP_xx macros must swap bytes. */
 #define CO_LITTLE_ENDIAN
 #define CO_SWAP_16(x) x
